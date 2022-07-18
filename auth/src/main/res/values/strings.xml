@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="auth_code_pin_view_hint">_</string>
+    <string name="auth_code_num_pad_key_1">1</string>
+    <string name="auth_code_num_pad_key_2">2</string>
+    <string name="auth_code_num_pad_key_3">3</string>
+    <string name="auth_code_num_pad_key_4">4</string>
+    <string name="auth_code_num_pad_key_5">5</string>
+    <string name="auth_code_num_pad_key_6">6</string>
+    <string name="auth_code_num_pad_key_7">7</string>
+    <string name="auth_code_num_pad_key_8">8</string>
+    <string name="auth_code_num_pad_key_9">9</string>
+    <string name="auth_code_num_pad_key_0">0</string>
+    <string name="auth_code_wrong_pin_code">wrong PIN-code</string>
+</resources>

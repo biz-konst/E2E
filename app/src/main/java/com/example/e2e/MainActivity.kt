@@ -2,10 +2,10 @@ package com.example.e2e
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.ViewCompat
 import androidx.core.view.WindowCompat
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // включаем рисование за системными барами
@@ -20,4 +20,5 @@ class MainActivity : AppCompatActivity() {
 
         setContentView(R.layout.activity_main)
     }
+
 }

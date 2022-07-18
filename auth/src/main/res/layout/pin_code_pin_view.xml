@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckedTextView xmlns:tools="http://schemas.android.com/tools"
+    style="?attr/authPinCodePinViewStyle"
+    tools:viewBindingIgnore="true" />

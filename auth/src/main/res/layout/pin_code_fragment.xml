@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/codeContainer"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:theme="@style/ThemeOverlay.Auth.Code.Container"
+    app:theme="?attr/authPinCodeContainerTheme">
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/captionText"
+        style="?attr/authPinCodeCaptionStyle"
+        android:text="?attr/authPinCodeCaptionText"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="63dp"
+        tools:text="Enter code" />
+
+    <FrameLayout
+        android:id="@+id/codeLayout"
+        style="?attr/authPinCodeCodeLayoutStyle"
+        android:theme="?attr/authPinCodeCodeLayoutTheme"
+        tools:ignore="MissingConstraints">
+
+        <bk.github.auth.pincode.views.PinCodeGrid
+            android:id="@+id/pinGrid"
+            style="?attr/authPinCodePinLayoutStyle"
+            android:theme="?attr/authPinCodePinLayoutTheme"
+            android:visibility="invisible">
+
+            <!--            <include layout="@layout/pin_code_pin_view" />-->
+            <!--            <include layout="@layout/pin_code_pin_view" />-->
+            <!--            <include layout="@layout/pin_code_pin_view" />-->
+            <!--            <include layout="@layout/pin_code_pin_view" />-->
+        </bk.github.auth.pincode.views.PinCodeGrid>
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/checkProgressBar"
+            style="?attr/authPinCodeProgressStyle" />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/helperLayout"
+        style="?attr/authPinCodeHelperLayoutStyle"
+        android:theme="?attr/authPinCodeHelperLayoutTheme"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="78dp"
+        tools:layout_editor_absoluteY="63dp">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/helperText"
+            style="?attr/authPinCodeHelperTextStyle"
+            tools:text="helper text" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/errorText"
+            style="?attr/authPinCodeErrorTextStyle"
+            android:visibility="gone" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/progressText"
+            style="?attr/authPinCodeProgressTextStyle"
+            android:visibility="gone" />
+    </FrameLayout>
+
+    <GridLayout
+        android:id="@+id/numPadLayout"
+        style="?attr/authPinCodeNumPadLayoutStyle"
+        android:theme="?attr/authPinCodeNumPadLayoutTheme"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum1"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_1" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum2"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_2" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum3"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_3" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum4"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_4" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum5"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_5" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum6"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_6" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum7"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_7" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum8"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_8" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum9"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:text="@string/auth_code_num_pad_key_9" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionQuery"
+            style="?attr/authPinCodeNumPadQueryStyle" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionNum0"
+            style="?attr/authPinCodeNumPadKeyStyle"
+            android:layout_column="1"
+            android:text="@string/auth_code_num_pad_key_0" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/actionBackspace"
+            style="?attr/authPinCodeNumPadBackspaceStyle" />
+
+    </GridLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/requestDelayText"
+        style="?attr/authPinCodeQueryDelayTextStyle"
+        tools:ignore="MissingConstraints"
+        tools:text="delay text" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

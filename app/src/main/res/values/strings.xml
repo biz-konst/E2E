@@ -1,3 +1,31 @@
-<resources>
-    <string name="app_name">E2E</string>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="app_name" translatable="false">E2E</string>
+
+    <!--  auth  -->
+    <string name="auth_nickname_hint" translatable="false">Account ID</string>
+    <string name="auth_password_hint" translatable="false">Password</string>
+    <string name="auth_action_text" translatable="false">Sign In / Sign Up</string>
+    <string name="auth_sign_password_too_short">Password must be at least 2 characters</string>
+    <!--  auth code  -->
+    <!--    <string name="auth_code_pin_hint" translatable="false" />-->
+    <string name="auth_code_enter_pin_code">Enter PIN code</string>
+    <plurals name="auth_code_attempts_left" tools:ignore="MissingDefaultResource">
+        <item quantity="one">%d attempt left</item>
+        <item quantity="other">%d attempts left</item>
+    </plurals>
+    <plurals name="auth_code_attempts_left_with_lifetime" tools:ignore="MissingDefaultResource">
+        <item quantity="one">%d attempt left in %3$s</item>
+        <item quantity="other">%d attempts left in %3$s</item>
+    </plurals>
+    <string name="auth_code_attempts_lifetime">attempts will end in %s</string>
+    <string name="auth_code_request_pin_code">Query PIN code</string>
+    <string name="auth_code_request_pin_code_delay">You can request the code again after %s </string>
+    <string name="auth_code_seconds">sec</string>
+    <string name="auth_code_invalid_pin_code">PIN code wrong</string>
+    <string name="auth_code_unexpected_pin_code">Unexpected PIN code</string>
+    <string name="auth_code_need_pin_code_request">PIN code request required</string>
+    <string name="auth_code_pin_code_accepted">PIN code accepted</string>
+    <string name="auth_code_checking_pin_code_progress">PIN code checking…</string>
+    <string name="auth_code_request_pin_code_progress">PIN code request…</string>
+
 </resources>

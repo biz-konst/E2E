@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <string name="auth_sign_password_too_short">Пароль должен быть не менее 2 символов</string>
+    <string name="auth_code_enter_pin_code">Введите пин-код</string>
+    <plurals name="auth_code_attempts_left" tools:ignore="MissingDefaultResource">
+        <item quantity="one">осталось %d попытка</item>
+        <item quantity="few">осталось %d попытки</item>
+        <item quantity="many">осталось %d попыток</item>
+    </plurals>
+    <plurals name="auth_code_attempts_left_with_lifetime" tools:ignore="MissingDefaultResource">
+        <item quantity="one">осталось %d попытка за %3$s</item>
+        <item quantity="few">осталось %d попытки за %3$s</item>
+        <item quantity="many">осталось %d попыток за %3$s</item>
+    </plurals>
+    <string name="auth_code_attempts_lifetime">попытки закончатся через %s</string>
+    <string name="auth_code_request_pin_code">Запросить пин-код</string>
+    <string name="auth_code_request_pin_code_delay">Повторно код можно запросить через %s</string>
+    <string name="auth_code_seconds">сек</string>
+    <string name="auth_code_invalid_pin_code">Введен неверный пин-код</string>
+    <string name="auth_code_unexpected_pin_code">Неожиданный пин-код</string>
+    <string name="auth_code_need_pin_code_request">Запросите пин-код</string>
+    <string name="auth_code_pin_code_accepted">Пин-код принят</string>
+    <string name="auth_code_checking_pin_code_progress">пин-код проверяется…</string>
+    <string name="auth_code_request_pin_code_progress">пин-код запрашивается…</string>
+</resources>

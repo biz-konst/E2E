@@ -3,7 +3,46 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/work/android/gradle/caches/transforms-3/5f7c3c923349d42ca313e04370c06a8c/transformed/appcompat-1.4.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.1" />
+        <entry key="..\:/work/android/gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/avd_hide_password.xml" value="0.1" />
+        <entry key="..\:/work/android/gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/design_ic_visibility.xml" value="0.1" />
+        <entry key="..\:/work/android/gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/design_ic_visibility_off.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/auth_pin_icon.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_auth_nickname_24.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_radio_button_checked_24.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_radio_button_unchecked_24.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/selector.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/activity_main.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_blank.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_code.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_code2.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_pin_code.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_sign_in.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/drawable/auth_pin_icon.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/drawable/ic_refresh_24.xml" value="0.15" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/drawable/refresh_pin_code_icon.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/drawable/test.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout-v26/auth_fragment.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/auth_fragment.xml" value="0.415625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/code_fragment.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/code_num_pad.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/code_pin_view.xml" value="0.46458333333333335" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/fragment.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_fragment.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_fragment2.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_pin_view.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/sign_in_fragment.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/signin_fragment.xml" value="0.428125" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/test.xml" value="0.46458333333333335" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/drawable/progress_indeterminate_anim_medium_material.xml" value="0.1" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/drawable/vector_drawable_progress_bar_medium.xml" value="0.1" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/layout/simple_dropdown_item_1line.xml" value="0.465625" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/layout/simple_list_item_checked.xml" value="0.465625" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/layout/simple_spinner_dropdown_item.xml" value="0.465625" />
+        <entry key="..\:/work/android/sdk/platforms/android-31/data/res/layout/simple_spinner_item.xml" value="0.465625" />
       </map>
     </option>
   </component>

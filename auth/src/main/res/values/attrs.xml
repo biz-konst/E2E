@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--  auth  -->
+    <attr name="authSignInContainerTheme" format="reference" />
+    <attr name="authSignInNicknameTextInputLayoutStyle" format="reference" />
+    <attr name="authSignInNicknameHint" format="string" />
+    <attr name="authSignInPasswordTextInputLayoutStyle" format="reference" />
+    <attr name="authSignInPasswordHint" format="string" />
+    <attr name="authSignInButtonStyle" format="reference" />
+    <attr name="authSignInButtonText" format="string" />
+
+    <!--  code  -->
+    <attr name="authPinCodeCaptionStyle" format="reference" />
+    <attr name="authPinCodeCodeLayoutStyle" format="reference" />
+    <attr name="authPinCodePinLayoutStyle" format="reference" />
+    <attr name="authPinCodeHelperLayoutStyle" format="reference" />
+    <attr name="authPinCodeErrorTextStyle" format="reference" />
+    <attr name="authPinCodeHelperTextStyle" format="reference" />
+    <attr name="authPinCodeProgressTextStyle" format="reference" />
+    <attr name="authPinCodeProgressStyle" format="reference" />
+    <attr name="authPinCodeNumPadLayoutStyle" format="reference" />
+    <attr name="authPinCodeNumPadKeyStyle" format="reference" />
+    <attr name="authPinCodeNumPadBackspaceStyle" format="reference" />
+    <attr name="authPinCodeNumPadQueryStyle" format="reference" />
+    <attr name="authPinCodeQueryDelayTextStyle" format="reference" />
+    <attr name="authPinCodePinViewStyle" format="reference" />
+
+    <attr name="authPinCodeCaptionText" format="string" />
+    <attr name="authPinCodePinViewHint" format="string" />
+
+    <attr name="authPinCodeContainerTheme" format="reference" />
+    <attr name="authPinCodeCodeLayoutTheme" format="reference" />
+    <attr name="authPinCodePinLayoutTheme" format="reference" />
+    <attr name="authPinCodeHelperLayoutTheme" format="reference" />
+    <attr name="authPinCodeNumPadLayoutTheme" format="reference" />
+
+    <!--    <attr name="authPinCodeNumPadSendStyle" format="reference" />-->
+    <!--    <attr name="authPinCodeQueryProgressStyle" format="reference" />-->
+    <!--    <attr name="authPinCodeQueryButtonStyle" format="reference" />-->
+    <!--    <attr name="authPinCodeQueryButtonText" format="string" />-->
+
+</resources>

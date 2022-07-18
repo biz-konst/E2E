@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Base.E2E.Platform.V27" parent="Base.E2E.Platform.V23">
+        <!-- Status bar color. -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+    </style>
+</resources>

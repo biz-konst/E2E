@@ -1,25 +1,92 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
-    <style name="Theme.App" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">@android:color/transparent</item>
-        <item name="android:windowLightStatusBar" tools:targetApi="23">true</item>
-        <!-- Navigation bar color. -->
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27">true</item>
+
+    <!--  platform themes  -->
+    <style name="Base.E2E.Platform" parent="Theme.Material3.DayNight.NoActionBar">
+        <!--  status bar color  -->
+        <item name="android:statusBarColor">@color/status_bar_color</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <!--  navigation bar color  -->
+        <item name="android:navigationBarColor">@color/navigation_bar_color</item>
+        <!--        <item name="android:navigationBarDividerColor" tools:ignore="NewApi" />-->
+        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
     </style>
 
-    <style name="Theme.E2E" parent="Theme.App">
-        <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
-        <item name="colorOnPrimary">@color/white</item>
-
-        <item name="android:colorBackground">@color/white</item>
-        <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/teal_200</item>
-        <item name="colorSecondaryVariant">@color/teal_700</item>
-        <item name="colorOnSecondary">@color/black</item>
-        <!-- Customize your theme here. -->
+    <!--  app theme  -->
+    <style name="Base.E2E" parent="Base.E2E.Platform.V27">
+        <!--  material color attributes  -->
+        <!--  primary brand color  -->
+        <!--        <item name="colorPrimary">@color/purple_500</item>-->
+        <!--        <item name="colorPrimaryVariant">@color/purple_700</item>-->
+        <!--        <item name="colorOnPrimary">@color/white</item>-->
+        <!---->
+        <!--        <item name="android:colorBackground">@color/white</item>-->
+        <!--  secondary brand color  -->
+        <!--        <item name="colorSecondary">@color/teal_200</item>-->
+        <!--        <item name="colorSecondaryVariant">@color/teal_700</item>-->
+        <!--        <item name="colorOnSecondary">@color/black</item>-->
+        <!--  material type attributes  -->
+        <!--  material shape attributes  -->
+        <!--  component styles  -->
+        <!--  customize your theme here  -->
+        <!--        <item name="android:overScrollMode">never</item>-->
+        <!-- Auth -->
+        <item name="authSignInContainerTheme">@style/ThemeOverlay.Auth.SignInContainer</item>
+        <!-- Auth code -->
+        <item name="authPinCodeContainerTheme">@style/ThemeOverlay.Auth.PinCodeContainer</item>
     </style>
+
+    <!--  light/dark theme  -->
+    <style name="App.2E2.DayNight" parent="Base.E2E" />
+
+
+    <!--  feature themes  -->
+
+    <style name="ThemeOverlay.Auth.SignInContainer" parent="">
+        <item name="authSignInNicknameTextInputLayoutStyle">
+            @style/Widget.Auth.Sign.TextInputLayout.Nickname
+        </item>
+        <item name="authSignInPasswordTextInputLayoutStyle">
+            @style/Widget.Auth.Sign.TextInputLayout.Password
+        </item>
+        <item name="authSignInButtonStyle">@style/Widget.Auth.Sign.Button.SignIn</item>
+        <item name="authSignInNicknameHint">@string/auth_nickname_hint</item>
+        <item name="authSignInPasswordHint">@string/auth_password_hint</item>
+        <item name="authSignInButtonText">@string/auth_action_text</item>
+    </style>
+
+    <style name="ThemeOverlay.Auth.TextInputEditText.Nickname" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">
+        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Nickname</item>
+    </style>
+
+    <style name="ThemeOverlay.Auth.TextInputEditText.Password" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">
+        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Password</item>
+    </style>
+
+    <style name="ThemeOverlay.Auth.PinCodeContainer" parent="">
+        <!--        <item name="android:layout_gravity">center</item>-->
+<!--        <item name="authPinCodeCaptionStyle">@style/Widget.Auth.Code.TextView.Title</item>-->
+        <item name="authPinCodeCaptionText">@string/auth_code_enter_pin_code</item>
+<!--        <item name="authPinCodePinLayoutStyle">@style/Widget.Auth.Code.PinCodeLayout.PinCode</item>-->
+<!--        <item name="authPinCodeHelperLayoutStyle">@style/Widget.Auth.Code.FrameLayout.Helper</item>-->
+<!--        <item name="authPinCodeErrorTextStyle">@style/Widget.Auth.Code.TextView.Error</item>-->
+<!--        <item name="authPinCodeHelperTextStyle">@style/Widget.Auth.Code.TextView.Helper</item>-->
+<!--        <item name="authPinCodeCheckProgressStyle">@style/Widget.Auth.Code.ProgressBar.Check</item>-->
+<!--        <item name="authPinCodePinViewStyle">@style/Widget.Auth.Code.CheckedTextView.PinView</item>-->
+<!--        <item name="authPinCodeNumPadKeyStyle">@style/Widget.Auth.Code.Button.NumPadKey</item>-->
+<!--        <item name="authPinCodeNumPadSendStyle">@style/Widget.Auth.Code.Button.Send</item>-->
+<!--        <item name="authPinCodeNumPadQueryStyle">@style/Widget.Auth.Code.Button.Query</item>-->
+<!--        <item name="authPinCodeNumPadSendStyle"/>-->
+<!--        <item name="authPinCodeNumPadQueryStyle"/>-->
+<!--        <item name="authPinCodeQueryProgressStyle">@style/Widget.Auth.Code.ProgressBar.Query</item>-->
+<!--        <item name="authPinCodeNumPadBackspaceStyle">@style/Widget.Auth.Code.Button.Backspace</item>-->
+<!--        <item name="authPinCodeNumPadBackspaceStyle"/>-->
+<!--        <item name="authPinCodeQueryTextStyle">@style/Widget.Auth.Code.TextView.RequestDelay</item>-->
+<!--        <item name="authPinCodeQueryButtonStyle">@style/Widget.Auth.Code.Button.QueryCode</item>-->
+<!--        <item name="authPinCodeQueryButtonText">@string/auth_code_request_pin_code</item>-->
+    </style>
+
+<!--    <style name="ThemeOverlay.Auth.GridLayout.PinCode" parent="">-->
+<!--        <item name="authPinCodePinViewHint">@string/auth_code_pin_hint</item>-->
+<!--    </style>-->
+
 </resources>

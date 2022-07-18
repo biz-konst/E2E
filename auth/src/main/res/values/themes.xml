@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="ThemeOverlay.Auth.Code.Container" parent="">
+        <!--   styles   -->
+        <item name="authPinCodeCaptionStyle">@style/Widget.Auth.Code.TextView.Caption</item>
+        <item name="authPinCodeProgressTextStyle">@style/Widget.Auth.Code.TextView.Progress</item>
+        <item name="authPinCodeCodeLayoutStyle">@style/Widget.Auth.Code.FrameLayout.Code</item>
+        <item name="authPinCodePinLayoutStyle">@style/Widget.Auth.Code.PinCodeLayout.PinCode</item>
+        <item name="authPinCodeProgressStyle">@style/Widget.Auth.Code.ProgressBar.Check</item>
+        <item name="authPinCodeHelperLayoutStyle">@style/Widget.Auth.Code.FrameLayout.Helper</item>
+        <item name="authPinCodeErrorTextStyle">@style/Widget.Auth.Code.TextView.Error</item>
+        <item name="authPinCodeHelperTextStyle">@style/Widget.Auth.Code.TextView.Helper</item>
+        <item name="authPinCodeNumPadLayoutStyle">@style/Widget.Auth.Code.GridLayout.NumPad</item>
+        <item name="authPinCodeNumPadKeyStyle">@style/Widget.Auth.Code.Button.NumPadKey</item>
+        <item name="authPinCodeNumPadQueryStyle">@style/Widget.Auth.Code.Button.Query</item>
+        <item name="authPinCodeNumPadBackspaceStyle">@style/Widget.Auth.Code.Button.Backspace</item>
+        <item name="authPinCodeQueryDelayTextStyle">
+            @style/Widget.Auth.Code.TextView.RequestDelay
+        </item>
+        <item name="authPinCodePinViewStyle">@style/Widget.Auth.Code.CheckedTextView.PinView</item>
+        <item name="authPinCodePinViewHint">@string/auth_code_pin_view_hint</item>
+    </style>
+
+</resources>

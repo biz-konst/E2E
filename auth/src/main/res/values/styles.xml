@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--  auth code  -->
+    <style name="Widget.Auth.Code.TextView" parent="Widget.AppCompat.TextView" />
+
+    <style name="Widget.Auth.Code.TextView.Small">
+        <item name="android:textAppearance">?attr/textAppearanceBodySmall</item>
+    </style>
+
+    <style name="Widget.Auth.Code.TextView.Caption">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+
+        <!--        <item name="layout_constraintBottom_toTopOf">@id/pinGrid</item>-->
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+    </style>
+
+    <style name="Widget.Auth.Code.FrameLayout.Code" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/auth_code_pin_grid_margin_top</item>
+        <item name="android:layout_marginBottom">@dimen/auth_code_pin_grid_margin_bottom</item>
+
+        <item name="layout_constraintBottom_toTopOf">@id/helperLayout</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/captionText</item>
+    </style>
+
+    <style name="Widget.Auth.Code.PinCodeLayout.PinCode" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:useDefaultMargins">true</item>
+        <item name="passwordMode">true</item>
+    </style>
+
+    <style name="Widget.Auth.Code.CheckedTextView.PinView" parent="Widget.Material3.CheckedTextView">
+        <!--        <item name="android:layout_width">wrap_content</item>-->
+        <item name="android:layout_width">@dimen/auth_code_pin_view_width</item>
+        <item name="android:layout_height">wrap_content</item>
+
+        <!--        <item name="android:checkMark">@drawable/auth_pin_icon</item>-->
+        <item name="android:textAppearance">?attr/textAppearanceTitleLarge</item>
+        <item name="android:textColor">@color/auth_code_pin_color</item>
+        <item name="android:hint">?attr/authPinCodePinViewHint</item>
+
+        <item name="android:duplicateParentState">true</item>
+    </style>
+
+    <style name="Widget.Auth.Code.ProgressBar.Check" parent="Widget.Material3.CircularProgressIndicator.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminate">true</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="Widget.Auth.Code.FrameLayout.Helper" parent="">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/auth_code_helper_layout_margin_top</item>
+
+        <item name="layout_constraintBottom_toTopOf">@id/numPadLayout</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/pinGrid</item>
+
+        <!-- поскольку нумпад в центре нам надо сделать отступ снизу у вышестоящего вью -->
+        <item name="android:layout_marginBottom">@dimen/auth_code_num_pad_margin_top</item>
+    </style>
+
+    <style name="Widget.Auth.Code.TextView.Error" parent="Widget.Auth.Code.TextView.Small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?attr/colorError</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Auth.Code.TextView.Helper" parent="Widget.Auth.Code.TextView.Small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Auth.Code.TextView.Progress" parent="Widget.Auth.Code.TextView.Small">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Auth.Code.GridLayout.NumPad" parent="">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:columnCount">3</item>
+        <item name="android:useDefaultMargins">true</item>
+
+        <!-- поскольку нумпад в центре нам надо сделать достаточные отступы,
+        чтобы не растягивался родительский макет -->
+        <item name="android:layout_marginTop">@dimen/auth_code_num_pad_gap_top</item>
+        <item name="android:layout_marginBottom">@dimen/auth_code_num_pad_gap_bottom</item>
+
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/captionText</item>
+    </style>
+
+    <style name="Widget.Auth.Code.Button.NumPadKey" parent="Widget.Material3.Button.TonalButton">
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:minWidth">@dimen/auth_code_num_pad_key_min_width</item>
+    </style>
+
+    <style name="Widget.Auth.Code.Button.Query" parent="Widget.Auth.Code.Button.NumPadKey">
+        <item name="icon">@drawable/refresh_pin_code_icon</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="Widget.Auth.Code.Button.Backspace" parent="Widget.Auth.Code.Button.NumPadKey">
+        <item name="icon">@android:drawable/ic_input_delete</item>
+        <item name="iconGravity">textStart</item>
+        <item name="iconPadding">0dp</item>
+    </style>
+
+    <style name="Widget.Auth.Code.TextView.RequestDelay" parent="Widget.Auth.Code.TextView.Small">
+        <!--        <item name="android:layout_width">0dp</item>-->
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/auth_code_delay_text_margin_top</item>
+        <item name="android:maxLines">2</item>
+
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/numPadLayout</item>
+    </style>
+
+</resources>
