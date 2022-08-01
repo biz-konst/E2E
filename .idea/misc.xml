@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Work/Android/Work/E2E/app/src/main/res/layout/pin_code_pin_view.xml" value="0.1" />
+        <entry key="..\:/Work/Android/Work/E2E/auth/src/main/res/layout/pin_code_fragment.xml" value="0.3476923076923077" />
         <entry key="..\:/work/android/gradle/caches/transforms-3/5f7c3c923349d42ca313e04370c06a8c/transformed/appcompat-1.4.1/res/layout/support_simple_spinner_dropdown_item.xml" value="0.1" />
         <entry key="..\:/work/android/gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/avd_hide_password.xml" value="0.1" />
         <entry key="..\:/work/android/gradle/caches/transforms-3/bd6d0e44f2aa57426d64e02a13067df9/transformed/material-1.6.0/res/drawable/design_ic_visibility.xml" value="0.1" />

@@ -66,6 +66,7 @@
         <!--        <item name="android:layout_gravity">center</item>-->
 <!--        <item name="authPinCodeCaptionStyle">@style/Widget.Auth.Code.TextView.Title</item>-->
         <item name="authPinCodeCaptionText">@string/auth_code_enter_pin_code</item>
+<!--        <item name="authPinCodePinViewLayout">@layout/pin_code_pin_view</item>-->
 <!--        <item name="authPinCodePinLayoutStyle">@style/Widget.Auth.Code.PinCodeLayout.PinCode</item>-->
 <!--        <item name="authPinCodeHelperLayoutStyle">@style/Widget.Auth.Code.FrameLayout.Helper</item>-->
 <!--        <item name="authPinCodeErrorTextStyle">@style/Widget.Auth.Code.TextView.Error</item>-->

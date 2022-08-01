@@ -43,7 +43,7 @@ class SignInDataSourceTest : SignInDataSource {
                 Result.failure(TimeoutException("Server not responded"))
             else -> Result.failure(
                 AuthException(
-                    code = SignInManagerImpl.LOGIN_NOT_FOUND,
+                    //code = SignInManagerImpl.LOGIN_NOT_FOUND,
                     message = "Login not found"
                 )
             )

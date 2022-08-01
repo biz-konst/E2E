@@ -25,11 +25,12 @@ open class SignInManagerImpl(
                 },
                 onFailure = {
                     Result.failure(
-                        if (it is AuthException && it.code == LOGIN_NOT_FOUND) {
-                            LoginNotFoundException(it.message)
-                        } else {
-                            it
-                        }
+//                        if (it is AuthException && it.code == LOGIN_NOT_FOUND) {
+//                            LoginNotFoundException(it.message)
+//                        } else {
+//                            it
+//                        }
+                    it
                     )
                 }
             )

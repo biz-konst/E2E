@@ -76,11 +76,11 @@ class PinCodeGrid @JvmOverloads constructor(
 
     init {
         val a = this.context.obtainStyledAttributes(
-            attrs, R.styleable.PinCodeLayout, defStyleAttr, defStyleRes
+            attrs, R.styleable.PinCodeGrid, defStyleAttr, defStyleRes
         )
         try {
-            setPasswordMode(a.getBoolean(R.styleable.PinCodeLayout_passwordMode, true))
-            failed = a.getBoolean(R.styleable.PinCodeLayout_failed, false)
+            setPasswordMode(a.getBoolean(R.styleable.PinCodeGrid_passwordMode, true))
+            failed = a.getBoolean(R.styleable.PinCodeGrid_failed, false)
         } finally {
             a.recycle()
         }

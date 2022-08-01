@@ -20,6 +20,7 @@
         </item>
         <item name="authPinCodePinViewStyle">@style/Widget.Auth.Code.CheckedTextView.PinView</item>
         <item name="authPinCodePinViewHint">@string/auth_code_pin_view_hint</item>
+        <item name="authPinCodePinViewLayout">@layout/pin_code_pin_view</item>
     </style>
 
 </resources>

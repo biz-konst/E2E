@@ -1,5 +1,7 @@
 package bk.github.auth.pincode.ui
 
+import android.content.Context
+import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -38,6 +40,8 @@ abstract class PinCodeFragment : Fragment() {
         private const val CHAR_9 = '9'
 
         const val TAG = "Auth.PinCodeFragment"
+
+        private val ATTRS = intArrayOf(R.attr.authPinCodePinViewLayout)
     }
 
     interface Animation {
@@ -65,10 +69,9 @@ abstract class PinCodeFragment : Fragment() {
     private inline val formatter get() = config.formatter
     private inline val animation get() = config.animation
     private inline val pinGrid get() = pinCodeBinding.pinGrid
-    private inline val pinViewId get() = config.pinViewId
     private inline val errorCleaningDelayMs get() = config.errorCleaningDelayMs
     private inline val pinCodeUnlockDelayMs get() = config.pinCodeUnlockDelayMs
-    private inline val initialPinCode get() = config.initialPinCode
+    private var pinViewId: Int = 0
 
     private val errorCleaner = Runnable { clearPinCode() }
     private val pinCodeUnlock = Runnable { unlockPinCode() }
@@ -82,6 +85,7 @@ abstract class PinCodeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         pinCodeBinding = PinCodeFragmentBinding.bind(view.findViewById(R.id.codeContainer))
         pinCodeBinding.apply {
+            initAttrs(codeContainer.context)
             pinGrid.setOnTextChangedListener(::onPinCodeChanged)
             setupNumPad()
             pinCodeViewModel.apply {
@@ -91,7 +95,6 @@ abstract class PinCodeFragment : Fragment() {
                 { requestStateChanged(it) }
                 observeOnLifecycle(uiState.combine(pinCodeInputLocked) { s, _ -> uiStateChanged(s) })
             }
-            pinGrid.code = initialPinCode
         }
     }
 
@@ -140,6 +143,20 @@ abstract class PinCodeFragment : Fragment() {
         state.pinCodeState.length == 0
                 || state.pinCodeState.status == PinCodeStatus.Checking
                 || state.requestState.status == RequestStatus.Performing
+
+    fun setPinCode(value: String) {
+        pinGrid.code = value
+        checkPinCode(value)
+    }
+
+    private fun initAttrs(context: Context) {
+        val a = context.theme.obtainStyledAttributes(ATTRS)
+        try {
+            pinViewId = a.getResourceId(0, R.layout.pin_code_pin_view)
+        } finally {
+            a.recycle()
+        }
+    }
 
     private fun setupNumPad() {
         pinCodeBinding.apply {

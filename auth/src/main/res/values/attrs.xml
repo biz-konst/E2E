@@ -34,9 +34,6 @@
     <attr name="authPinCodeHelperLayoutTheme" format="reference" />
     <attr name="authPinCodeNumPadLayoutTheme" format="reference" />
 
-    <!--    <attr name="authPinCodeNumPadSendStyle" format="reference" />-->
-    <!--    <attr name="authPinCodeQueryProgressStyle" format="reference" />-->
-    <!--    <attr name="authPinCodeQueryButtonStyle" format="reference" />-->
-    <!--    <attr name="authPinCodeQueryButtonText" format="string" />-->
+    <attr name="authPinCodePinViewLayout" format="reference" />
 
 </resources>

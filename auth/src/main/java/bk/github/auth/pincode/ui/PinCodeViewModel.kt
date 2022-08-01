@@ -4,9 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import bk.github.auth.pincode.PinCodeFeatureConfig
 import bk.github.auth.pincode.data.PinCodeManager
-import bk.github.auth.pincode.WrongPinCodeException
-import bk.github.auth.pincode.data.model.PinCodeSecret
 import bk.github.auth.pincode.data.model.PinCodeState
+import bk.github.auth.pincode.data.model.PinCodeValue
 import bk.github.auth.pincode.ui.PinCodeViewModel.ModelState.PerformStatus
 import bk.github.auth.pincode.ui.PinCodeViewModel.UiState.PinCodeStatus
 import bk.github.auth.pincode.ui.PinCodeViewModel.UiState.RequestStatus
@@ -49,7 +48,6 @@ class PinCodeViewModel(
         .flatMapLatest { endTime -> startTimer(endTime) }
 
     private val uiEvent = MutableSharedFlow<UiEvent>()
-
     private val modelState = MutableStateFlow(ModelState.EMPTY)
 
     @ExperimentalCoroutinesApi
@@ -108,7 +106,7 @@ class PinCodeViewModel(
                     failure = a.queryPinCodeStatus.failure,
                 ),
                 lifetime = l,
-                attemptNumber = a.attemptNumber,
+                attemptNumber = p.attemptsSpent,
                 timeout = t,
             )
         }.flowOn(
@@ -116,7 +114,7 @@ class PinCodeViewModel(
         ).stateIn(
             scope = viewModelScope,
             started = SharingStarted.WhileSubscribed(
-                stopTimeoutMillis = config.stopUiStateFlowTimeoutMillis
+                stopTimeoutMillis = config.stopUiStateFlowTimeoutMs
             ),
             initialValue = UiState.EMPTY
         )
@@ -157,11 +155,11 @@ class PinCodeViewModel(
     }
 
     private suspend fun acceptPinCode(code: String): Result<*> = runCatching {
-        manager.acceptPinCode(PinCodeSecret(id = pinCodeState.value.id, value = code)).getOrThrow()
+        manager.acceptPinCode(PinCodeValue(id = pinCodeState.value.id, value = code)).getOrThrow()
     }
 
     private suspend fun requestPinCode(): Result<PinCodeState> = runCatching {
-        manager.requestPinCode(pinCodeState.value.id).getOrThrow()
+        manager.requestPinCode(id = pinCodeState.value.id).getOrThrow()
     }
 
     private fun availableAttempts(state: PinCodeState): Int =
@@ -219,7 +217,6 @@ class PinCodeViewModel(
     }
 
     private data class ModelState(
-        val attemptNumber: Int,
         val checkPinCodeStatus: PerformStatus,
         val queryPinCodeStatus: PerformStatus,
     ) {
@@ -231,7 +228,6 @@ class PinCodeViewModel(
 
         companion object {
             val EMPTY = ModelState(
-                attemptNumber = 0,
                 checkPinCodeStatus = PerformStatus.None,
                 queryPinCodeStatus = PerformStatus.None,
             )
@@ -267,19 +263,14 @@ class PinCodeViewModel(
         if (e is CancellationException) {
             copy(checkPinCodeStatus = PerformStatus.None)
         } else {
-            val lostAttempts = if (e is WrongPinCodeException) 1 else 0
-            copy(
-                attemptNumber = attemptNumber + lostAttempts,
-                checkPinCodeStatus = PerformStatus.Done(e)
-            )
+            copy(checkPinCodeStatus = PerformStatus.Done(e))
         }
 
     private fun ModelState.cleanPinCodeResult() = copy(checkPinCodeStatus = PerformStatus.None)
 
     private fun ModelState.requestPerforming() = copy(queryPinCodeStatus = PerformStatus.Performing)
 
-    private fun ModelState.requestSuccess() =
-        copy(attemptNumber = 0, queryPinCodeStatus = PerformStatus.Done())
+    private fun ModelState.requestSuccess() = copy(queryPinCodeStatus = PerformStatus.Done())
 
     private fun ModelState.requestFailed(e: Throwable) =
         if (e is CancellationException) {

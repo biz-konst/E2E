@@ -1,9 +1,11 @@
 package bk.github.auth.pincode.data
 
 import bk.github.auth.pincode.PinCodeFeatureConfig
+import bk.github.auth.pincode.WrongPinCodeException
 import bk.github.auth.pincode.data.PinCodeManagerImpl.Error.WrongPinCode
-import bk.github.auth.pincode.data.model.PinCodeSecret
 import bk.github.auth.pincode.data.model.PinCodeState
+import bk.github.auth.pincode.data.model.PinCodeValue
+import bk.github.auth.pincode.data.model.asState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,37 +14,53 @@ import kotlinx.coroutines.flow.update
 @Suppress("MemberVisibilityCanBePrivate")
 open class PinCodeManagerImpl(
     protected val source: PinCodeDataSource,
-    protected val config: PinCodeFeatureConfig,
+    protected val errorMapper: (error: Error) -> Throwable,
     initialState: PinCodeState = PinCodeState.EMPTY
 ) : PinCodeManager {
 
     enum class Error { WrongPinCode }
+
+    protected var attemptNumber: Int = 0
 
     protected val pinCodeState = MutableStateFlow(initialState)
 
     override fun observePinCodeState(): Flow<PinCodeState> = pinCodeState.asStateFlow()
 
     override suspend fun requestPinCode(id: String?): Result<PinCodeState> {
-        return source.requestPinCode(id).map {
-            it.copy(lastRequestTime = System.currentTimeMillis())
-        }.onSuccess { pinCodeState.update { it } }
+        return source.requestPinCode(id).map { spec ->
+            spec.asState(
+                attemptsSpent = 0,
+                lastRequestTime = System.currentTimeMillis()
+            )
+        }.onSuccess { s ->
+            attemptNumber = s.attemptsSpent
+            pinCodeState.update { s }
+        }
     }
 
     override suspend fun verifyPinCode(pinCode: String): String? = null
 
-    override suspend fun acceptPinCode(secret: PinCodeSecret): Result<*> {
+    override suspend fun acceptPinCode(secret: PinCodeValue): Result<*> {
         val encoded = encodePin(secret.value)
-
-        with(pinCodeState.value) {
+        val result = with(pinCodeState.value) {
             if (value != null && value != encoded) {
-                return Result.failure<Any>(config.errorMapper(WrongPinCode))
+                Result.failure<Any>(errorMapper(WrongPinCode))
+            } else {
+                source.acceptPinCode(PinCodeValue(id, encoded))
             }
-
-            return source.acceptPinCode(PinCodeSecret(id, encoded))
         }
+        adjustAttemptNumber(result)
+        return result
     }
 
     open fun encodePin(value: String): String = value
+
+    private fun adjustAttemptNumber(resultOfAccept: Result<*>) {
+        if (resultOfAccept.exceptionOrNull() is WrongPinCodeException) {
+            attemptNumber++
+            pinCodeState.update { it.copy(attemptsSpent = attemptNumber) }
+        }
+    }
 
 }
 

@@ -1,9 +1,10 @@
 package bk.github.auth.pincode.data
 
-import bk.github.auth.pincode.data.model.PinCodeSecret
+import bk.github.auth.pincode.data.model.PinCodeSpec
+import bk.github.auth.pincode.data.model.PinCodeValue
 import bk.github.auth.pincode.data.model.PinCodeState
 
 interface PinCodeDataSource {
-    suspend fun requestPinCode(id: String?): Result<PinCodeState>
-    suspend fun acceptPinCode(pinCode: PinCodeSecret): Result<*>
+    suspend fun requestPinCode(id: String?): Result<PinCodeSpec>
+    suspend fun acceptPinCode(pinCode: PinCodeValue): Result<*>
 }

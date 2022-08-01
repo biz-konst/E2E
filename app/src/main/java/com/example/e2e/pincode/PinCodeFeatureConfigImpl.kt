@@ -9,9 +9,8 @@ import bk.github.auth.pincode.WrongPinCodeException
 class PinCodeFeatureConfigImpl(private val application: Application) : PinCodeFeatureConfig {
 
     override val formatter = PinCodeFormatterImpl(application)
-    override val errorMapper = ::mapPinCodeError
 
-    private fun mapPinCodeError(error: PinCodeManagerImpl.Error): WrongPinCodeException {
+    fun mapPinCodeError(error: PinCodeManagerImpl.Error): WrongPinCodeException {
         return WrongPinCodeException(
             when (error) {
                 PinCodeManagerImpl.Error.WrongPinCode -> application.getString(R.string.auth_code_wrong_pin_code)

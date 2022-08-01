@@ -1,6 +1,6 @@
 package bk.github.auth.pincode.data.model
 
-data class PinCodeSecret(
+data class PinCodeValue(
     val id: String,
     val value: String
 )

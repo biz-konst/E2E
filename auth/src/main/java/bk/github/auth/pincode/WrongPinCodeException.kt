@@ -1,6 +1,6 @@
 package bk.github.auth.pincode
 
-class WrongPinCodeException @JvmOverloads constructor(
-    message: String? = null,
-    cause: Throwable? = null,
-) : Exception(message, cause)
+import bk.github.auth.AuthException
+
+class WrongPinCodeException(message: String? = null, cause: Throwable? = null) :
+    AuthException(message, cause)
