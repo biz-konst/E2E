@@ -5,8 +5,6 @@
     android:id="@+id/codeContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
     android:theme="@style/ThemeOverlay.Auth.Code.Container"
     app:theme="?attr/authPinCodeContainerTheme">
 

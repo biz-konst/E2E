@@ -33,8 +33,40 @@ class PinCodeGrid @JvmOverloads constructor(
     }
 
     fun interface OnTextChangedListener {
+
+        /**
+         * Вызывается при изменении текста пин-кода
+         *
+         * @param view ссылка на макет ввода пин-кода
+         * @param text новый тест пин-кода
+         */
         fun onPinCodeTextChanged(view: View, text: String)
     }
+
+    interface OnUpdateSlotsListener {
+
+        /**
+         * Вызывается при добавлении вью в макет
+         *
+         * @param view добавляемое вью
+         * @return флаг добавления вью в список слотов, если false - вью не добаляется
+         */
+        fun onPinCodeAddSlot(view: View): Boolean
+
+        /**
+         * Вызывается при обновлении слота пин-кода
+         *
+         * @param view представление слота
+         * @param text текст, устанавливаемый в слот
+         * @return флаг стандартной обработки, если false - стандартная обработка не вызывается
+         */
+        fun onPinCodeUpdateSlot(view: View, text: String?): Boolean
+    }
+
+    /**
+     * Максимальная длина пин-кода
+     */
+    val length: Int get() = slotViews.size
 
     /**
      * Текущий пин-код
@@ -42,11 +74,6 @@ class PinCodeGrid @JvmOverloads constructor(
     var code: String
         get() = editable.toString()
         set(value) = setCodeInternal(value)
-
-    /**
-     * Максимальная длина пин-кода
-     */
-    val length: Int get() = slotViews.size
 
     /**
      * Признак неверного пин-кода для отображения состояния ошибки
@@ -60,12 +87,27 @@ class PinCodeGrid @JvmOverloads constructor(
         }
 
     /**
+     * Фильтры, применяемые на ввод пин-кода
+     */
+    var filters: Array<InputFilter>
+        get() = editable.filters
+        set(value) {
+            editable.filters = value
+        }
+
+    /**
      * Слушатель измнения пин-сода
      */
     @JvmField
     var onTextChangedListener: OnTextChangedListener? = null
 
-    private var editable: Editable = SpannableStringBuilder().also {
+    /**
+     * Слушатель обновления слота пин-кода
+     */
+    @JvmField
+    var onUpdateSlotsListener: OnUpdateSlotsListener? = null
+
+    private val editable: Editable = SpannableStringBuilder().also {
         it.setSpan(PinWatcher(), 0, it.length, Spanned.SPAN_INCLUSIVE_INCLUSIVE)
     }
 
@@ -88,7 +130,9 @@ class PinCodeGrid @JvmOverloads constructor(
 
     override fun onViewAdded(child: View) {
         super.onViewAdded(child)
-        if (child is TextView || child is Checkable) {
+        if (onUpdateSlotsListener?.onPinCodeAddSlot(child)
+                ?: (child is TextView || child is Checkable)
+        ) {
             slotViews.add(child)
             updateSlot(child, transformed.getOrNull(length - 1)?.toString())
         }
@@ -96,10 +140,9 @@ class PinCodeGrid @JvmOverloads constructor(
 
     override fun onViewRemoved(child: View) {
         super.onViewRemoved(child)
-        if (slotViews.remove(child)) {
-            if (editable.length > length) {
-                editable.delete(length, editable.length)
-            }
+        slotViews.remove(child)
+        if (editable.length > length) {
+            editable.delete(length, editable.length)
         }
     }
 
@@ -145,6 +188,7 @@ class PinCodeGrid @JvmOverloads constructor(
 
     /**
      * Добавить символ в конец текущего пин-кода
+     *
      * @param char добавляемый символ
      * @return true - если символ был добавлен
      */
@@ -157,6 +201,7 @@ class PinCodeGrid @JvmOverloads constructor(
 
     /**
      * Удалить символ из указанной позиции пин-кода
+     *
      * @param index позиция удаляемого символа
      */
     fun remove(index: Int) {
@@ -212,19 +257,23 @@ class PinCodeGrid @JvmOverloads constructor(
     }
 
     private fun updateSlot(view: View, text: String?) {
-        if (view is Checkable) {
-            if (view is CheckedTextView && view.checkMarkDrawable == null) {
-                view.text = text
-                return
-            }
-            view.isChecked = text != null
-        } else if (view is TextView) {
-            view.text = text
+        if (onUpdateSlotsListener?.onPinCodeUpdateSlot(view, text) != false) {
+            setSlotText(view, text)
         }
     }
 
     private fun setCodeInternal(value: String) {
         editable.replace(0, editable.length, value)
+    }
+
+    private fun setSlotText(view: View, text: String?) {
+        if (view is Checkable &&
+            !(view is CheckedTextView && view.checkMarkDrawable == null)
+        ) {
+            view.isChecked = text != null
+        } else if (view is TextView) {
+            view.text = text
+        }
     }
 
     private inner class PinWatcher : TextWatcher, SpanWatcher {
@@ -303,6 +352,7 @@ fun PinCodeGrid.applyLength(length: Int, viewId: Int) {
 
 /**
  * Добавить символ в конец текущего пин-кода или в начало, если пи-код уже полон
+ *
  * @param char добавляемый символ
  * @return true - если символ был добавлен
  */

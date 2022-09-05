@@ -1,6 +1,5 @@
 package bk.github.auth.pincode.data
 
-import bk.github.auth.pincode.PinCodeFeatureConfig
 import bk.github.auth.pincode.WrongPinCodeException
 import bk.github.auth.pincode.data.PinCodeManagerImpl.Error.WrongPinCode
 import bk.github.auth.pincode.data.model.PinCodeState
@@ -27,18 +26,14 @@ open class PinCodeManagerImpl(
     override fun observePinCodeState(): Flow<PinCodeState> = pinCodeState.asStateFlow()
 
     override suspend fun requestPinCode(id: String?): Result<PinCodeState> {
-        return source.requestPinCode(id).map { spec ->
-            spec.asState(
-                attemptsSpent = 0,
-                lastRequestTime = System.currentTimeMillis()
-            )
-        }.onSuccess { s ->
-            attemptNumber = s.attemptsSpent
-            pinCodeState.update { s }
-        }
+        return source.requestPinCode(id)
+            .map { spec ->
+                spec.asState()
+            }.onSuccess { s ->
+                attemptNumber = s.attemptsSpent
+                pinCodeState.update { s }
+            }
     }
-
-    override suspend fun verifyPinCode(pinCode: String): String? = null
 
     override suspend fun acceptPinCode(secret: PinCodeValue): Result<*> {
         val encoded = encodePin(secret.value)

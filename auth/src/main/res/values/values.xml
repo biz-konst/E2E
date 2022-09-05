@@ -4,4 +4,24 @@
         <attr name="passwordMode" format="boolean" />
         <attr name="failed" format="boolean" />
     </declare-styleable>
+    <declare-styleable name="AlignTextInputLayout">
+        <attr name="helperTextTextAlignment" format="integer">
+            <enum name="inherit" value="0" />
+            <enum name="gravity" value="1" />
+            <enum name="textStart" value="2" />
+            <enum name="textEnd" value="3" />
+            <enum name="center" value="4" />
+            <enum name="viewStart" value="5" />
+            <enum name="viewEnd" value="6" />
+        </attr>
+        <attr name="errorTextAlignment" format="integer">
+            <enum name="inherit" value="0" />
+            <enum name="gravity" value="1" />
+            <enum name="textStart" value="2" />
+            <enum name="textEnd" value="3" />
+            <enum name="center" value="4" />
+            <enum name="viewStart" value="5" />
+            <enum name="viewEnd" value="6" />
+        </attr>
+    </declare-styleable>
 </resources>

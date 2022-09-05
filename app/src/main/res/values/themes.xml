@@ -30,7 +30,7 @@
         <!--  customize your theme here  -->
         <!--        <item name="android:overScrollMode">never</item>-->
         <!-- Auth -->
-        <item name="authSignInContainerTheme">@style/ThemeOverlay.Auth.SignInContainer</item>
+<!--        <item name="authSignInContainerTheme">@style/ThemeOverlay.Auth.SignInContainer</item>-->
         <!-- Auth code -->
         <item name="authPinCodeContainerTheme">@style/ThemeOverlay.Auth.PinCodeContainer</item>
     </style>
@@ -42,25 +42,25 @@
     <!--  feature themes  -->
 
     <style name="ThemeOverlay.Auth.SignInContainer" parent="">
-        <item name="authSignInNicknameTextInputLayoutStyle">
-            @style/Widget.Auth.Sign.TextInputLayout.Nickname
-        </item>
-        <item name="authSignInPasswordTextInputLayoutStyle">
-            @style/Widget.Auth.Sign.TextInputLayout.Password
-        </item>
-        <item name="authSignInButtonStyle">@style/Widget.Auth.Sign.Button.SignIn</item>
-        <item name="authSignInNicknameHint">@string/auth_nickname_hint</item>
-        <item name="authSignInPasswordHint">@string/auth_password_hint</item>
-        <item name="authSignInButtonText">@string/auth_action_text</item>
+<!--        <item name="authSignInNicknameTextInputLayoutStyle">-->
+<!--            @style/Widget.Auth.Sign.TextInputLayout.Nickname-->
+<!--        </item>-->
+<!--        <item name="authSignInPasswordTextInputLayoutStyle">-->
+<!--            @style/Widget.Auth.Sign.TextInputLayout.Password-->
+<!--        </item>-->
+<!--        <item name="authSignInButtonStyle">@style/Widget.Auth.Sign.Button.SignIn</item>-->
+<!--        <item name="authSignInNicknameHint">@string/auth_nickname_hint</item>-->
+<!--        <item name="authSignInPasswordHint">@string/auth_password_hint</item>-->
+<!--        <item name="authSignInButtonText">@string/auth_action_text</item>-->
     </style>
 
-    <style name="ThemeOverlay.Auth.TextInputEditText.Nickname" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">
-        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Nickname</item>
-    </style>
+<!--    <style name="ThemeOverlay.Auth.TextInputEditText.Nickname" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">-->
+<!--        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Nickname</item>-->
+<!--    </style>-->
 
-    <style name="ThemeOverlay.Auth.TextInputEditText.Password" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">
-        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Password</item>
-    </style>
+<!--    <style name="ThemeOverlay.Auth.TextInputEditText.Password" parent="ThemeOverlay.Material3.TextInputEditText.OutlinedBox.Dense">-->
+<!--        <item name="editTextStyle">@style/Widget.Auth.Sign.TextInputEditText.Password</item>-->
+<!--    </style>-->
 
     <style name="ThemeOverlay.Auth.PinCodeContainer" parent="">
         <!--        <item name="android:layout_gravity">center</item>-->

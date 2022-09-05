@@ -18,7 +18,7 @@ class PinCodeDataSourceTest(private val application: Application) : PinCodeDataS
             length = 4,
             numberOfAttempts = 3,
             expirationTime = Long.MAX_VALUE,//System.currentTimeMillis() + 25_000L,
-            requestTimeout = 5_000L,
+            queryUnlockTime = 5_000L,
         )
 
     private var requestCount = 0

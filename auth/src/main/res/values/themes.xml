@@ -1,6 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="ThemeOverlay.Auth.Sign.Container" parent="">
+        <item name="authSignInNicknameTextInputLayoutStyle">
+            @style/Widget.Auth.Sign.TextInputLayout.Nickname
+        </item>
+        <item name="authSignInNicknameTextInputEditTextStyle">
+            @style/Widget.Auth.Sign.TextInputEditText.Nickname
+        </item>
+        <item name="authSignInPasswordTextInputLayoutStyle">
+            @style/Widget.Auth.Sign.TextInputLayout.Password
+        </item>
+        <item name="authSignInPasswordTextInputEditTextStyle">
+            @style/Widget.Auth.Sign.TextInputEditText.Password
+        </item>
+        <item name="authSignInButtonStyle">@style/Widget.Auth.Sign.Button.SignIn</item>
+    </style>
+
     <style name="ThemeOverlay.Auth.Code.Container" parent="">
         <!--   styles   -->
         <item name="authPinCodeCaptionStyle">@style/Widget.Auth.Code.TextView.Caption</item>

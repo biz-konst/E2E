@@ -1,7 +1,8 @@
 package bk.github.auth.signin.data
 
 import bk.github.auth.AUTH_BASE_ERROR_CODE
-import bk.github.auth.AuthException
+import bk.github.auth.signin.data.model.SignInData
+import kotlinx.coroutines.flow.Flow
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 open class SignInManagerImpl(
@@ -14,13 +15,15 @@ open class SignInManagerImpl(
         const val LOGIN_NOT_FOUND = ERROR_CODE + 1
     }
 
-    override fun observeAvailableLogins() = source.observeAvailableLogins()
+    override fun observeServerList(): Flow<List<String>> = source.observeServerList()
 
-    override suspend fun signIn(nickname: String, password: String): Result<Unit> {
-        return source.signIn(nickname, password)
+    override fun observeSignInState(server: String?) = source.observeSignInState(server)
+
+    override suspend fun signIn(data: SignInData): Result<*> {
+        return source.signIn(data)
             .fold(
                 onSuccess = {
-                    signedIn(nickname, it)
+                    signedIn(data.nickname, it)
                     Result.success(Unit)
                 },
                 onFailure = {
@@ -30,14 +33,14 @@ open class SignInManagerImpl(
 //                        } else {
 //                            it
 //                        }
-                    it
+                        it
                     )
                 }
             )
     }
 
-    open suspend fun signedIn(nickname: String, token: Any) {
-        source.addAvailableLogin(nickname)
+    open suspend fun signedIn(nickname: String, token: Any?) {
+        //source.addAvailableNickname(nickname)
     }
 
 }

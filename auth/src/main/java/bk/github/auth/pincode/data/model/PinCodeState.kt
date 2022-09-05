@@ -6,8 +6,7 @@ data class PinCodeState(
     val numberOfAttempts: Int = 0,
     val attemptsSpent: Int = 0,
     val expirationTime: Long = 0,
-    val requestTimeout: Long = 0,
-    val lastRequestTime: Long = 0,
+    val queryUnlockTime: Long = 0,
     val value: String? = null,
 ) {
     companion object {
@@ -15,13 +14,12 @@ data class PinCodeState(
     }
 }
 
-fun PinCodeSpec.asState(attemptsSpent: Int = 0, lastRequestTime: Long = 0) = PinCodeState(
+fun PinCodeSpec.asState(attemptsSpent: Int = 0) = PinCodeState(
     id = id,
     length = length,
     numberOfAttempts = numberOfAttempts,
     expirationTime = expirationTime,
-    requestTimeout = requestTimeout,
+    queryUnlockTime = queryUnlockTime,
     value = value,
     attemptsSpent = attemptsSpent,
-    lastRequestTime = lastRequestTime,
 )

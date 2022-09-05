@@ -1,52 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/signInContainer"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:gravity="center"
-    android:orientation="vertical"
-    android:theme="?attr/authSignInContainerTheme">
+    android:theme="@style/ThemeOverlay.Auth.Sign.Container"
+    app:theme="?attr/authSignInContainerTheme">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/serverInputLayout"
+        style="?attr/authSignInNicknameTextInputLayoutStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toTopOf="@id/nicknameInputLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+            android:id="@+id/serverEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textIsSelectable="true"
+            android:completionThreshold="0"
+            android:editable="false"/>
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nicknameInputLayout"
-        style="?attr/authSignInNicknameTextInputLayoutStyle">
+        style="?attr/authSignInNicknameTextInputLayoutStyle"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/nicknameEdit"
-            style="?attr/editTextStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            style="?attr/authSignInNicknameTextInputEditTextStyle"
             android:completionThreshold="0"
-            android:hint="?attr/authSignInNicknameHint"
             android:imeOptions="actionNext"
-            android:maxLines="1" />
+            tools:hint="Nickname" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
-        style="?attr/authSignInPasswordTextInputLayoutStyle">
+        style="?attr/authSignInPasswordTextInputLayoutStyle"
+        tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="?attr/authSignInPasswordHint"
+            style="?attr/authSignInPasswordTextInputEditTextStyle"
             android:imeOptions="actionDone"
-            android:maxLines="1" />
+            tools:hint="Password" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <Button
         android:id="@+id/actionSignIn"
         style="?attr/authSignInButtonStyle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="?attr/authSignInButtonText" />
+        tools:ignore="MissingConstraints"
+        tools:text="Sign In / Sign Up" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        style="@android:style/Widget.Material.Light.ProgressBar.Small"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

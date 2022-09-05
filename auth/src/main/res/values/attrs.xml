@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!--  auth  -->
-    <attr name="authSignInContainerTheme" format="reference" />
     <attr name="authSignInNicknameTextInputLayoutStyle" format="reference" />
-    <attr name="authSignInNicknameHint" format="string" />
+    <attr name="authSignInNicknameTextInputEditTextStyle" format="reference" />
     <attr name="authSignInPasswordTextInputLayoutStyle" format="reference" />
-    <attr name="authSignInPasswordHint" format="string" />
+    <attr name="authSignInPasswordTextInputEditTextStyle" format="reference" />
     <attr name="authSignInButtonStyle" format="reference" />
-    <attr name="authSignInButtonText" format="string" />
+
+    <attr name="authSignInContainerTheme" format="reference" />
 
     <!--  code  -->
     <attr name="authPinCodeCaptionStyle" format="reference" />

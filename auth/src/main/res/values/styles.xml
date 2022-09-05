@@ -1,18 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!--  auth sign  -->
+    <style name="Widget.Auth.Sign.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
+        <item name="android:layout_width">@dimen/auth_sign_edit_text_width</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:selectAllOnFocus">true</item>
+        <item name="helperTextEnabled">true</item>
+        <item name="hintEnabled">false</item>
+        <item name="errorEnabled">true</item>
+        <item name="errorIconDrawable">@null</item>
+
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputLayout.Nickname">
+        <item name="android:layout_marginTop">@dimen/auth_sign_nickname_margin_top</item>
+        <item name="startIconDrawable">@drawable/ic_auth_nickname_24</item>
+        <item name="endIconMode">dropdown_menu</item>
+
+        <item name="layout_constraintBottom_toTopOf">@id/passwordInputLayout</item>
+<!--        <item name="layout_constraintTop_toTopOf">parent</item>-->
+        <item name="layout_constraintTop_toBottomOf">@id/serverInputLayout</item>
+        <item name="layout_constraintVertical_chainStyle">packed</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputLayout.Password">
+        <item name="android:layout_marginTop">@dimen/auth_sign_password_margin_top</item>
+        <item name="startIconDrawable">@drawable/ic_auth_password_24</item>
+        <item name="passwordToggleEnabled">true</item>
+
+        <item name="layout_constraintBottom_toTopOf">@id/actionSignIn</item>
+        <item name="layout_constraintTop_toBottomOf">@id/nicknameInputLayout</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputEditText" parent="Widget.Material3.TextInputEditText.OutlinedBox.Dense">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputEditText.Nickname">
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputEditText.Password">
+        <item name="android:inputType">textPassword</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.Button.SignIn" parent="Widget.Material3.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/auth_sign_button_margin_top</item>
+
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintStart_toStartOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/passwordInputLayout</item>
+    </style>
+
     <!--  auth code  -->
-    <style name="Widget.Auth.Code.TextView" parent="Widget.AppCompat.TextView" />
+    <style name="Widget.Auth.Code.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
 
     <style name="Widget.Auth.Code.TextView.Small">
         <item name="android:textAppearance">?attr/textAppearanceBodySmall</item>
     </style>
 
     <style name="Widget.Auth.Code.TextView.Caption">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_gravity">center</item>
-
         <!--        <item name="layout_constraintBottom_toTopOf">@id/pinGrid</item>-->
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
@@ -69,29 +129,20 @@
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintTop_toBottomOf">@id/pinGrid</item>
 
-        <!-- поскольку нумпад в центре нам надо сделать отступ снизу у вышестоящего вью -->
+        <!-- поскольку нумпад в центре, нам надо сделать отступ снизу у вышестоящего вью -->
         <item name="android:layout_marginBottom">@dimen/auth_code_num_pad_margin_top</item>
     </style>
 
     <style name="Widget.Auth.Code.TextView.Error" parent="Widget.Auth.Code.TextView.Small">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
         <item name="android:textColor">?attr/colorError</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="Widget.Auth.Code.TextView.Helper" parent="Widget.Auth.Code.TextView.Small">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
     </style>
 
     <style name="Widget.Auth.Code.TextView.Progress" parent="Widget.Auth.Code.TextView.Small">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
         <item name="android:maxLines">1</item>
     </style>
 
@@ -132,8 +183,6 @@
 
     <style name="Widget.Auth.Code.TextView.RequestDelay" parent="Widget.Auth.Code.TextView.Small">
         <!--        <item name="android:layout_width">0dp</item>-->
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/auth_code_delay_text_margin_top</item>
         <item name="android:maxLines">2</item>
 

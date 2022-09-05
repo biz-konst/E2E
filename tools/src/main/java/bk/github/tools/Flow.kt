@@ -4,17 +4,9 @@ package bk.github.tools
 
 import android.os.SystemClock
 import androidx.lifecycle.*
-import kotlinx.coroutines.currentCoroutineContext
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.isActive
-import kotlinx.coroutines.launch
 
-//inline fun <T> MutableStateFlow<T>.update(block: (T) -> T): Flow<T> = apply {
-//    val new = block(value)
-//    if (new != value) value = new
-//}
-//
 /**
  * Поток с эмиссией через равные промежутки времени
  */
@@ -43,3 +35,32 @@ inline fun <T> Flow<T>.collectOnLifecycle(
     lifecycleOwner.repeatOnLifecycle(state) { collect(block) }
 }
 
+fun <T> MutableStateFlow<T>.launchWhileSubscribed(
+    scope: CoroutineScope,
+    once: Boolean = false,
+    block: suspend CoroutineScope.() -> Unit
+): MutableStateFlow<T> {
+    (this as MutableSharedFlow<*>).launchWhileSubscribed(scope, once, block)
+    return this
+}
+
+fun <T> MutableSharedFlow<T>.launchWhileSubscribed(
+    scope: CoroutineScope,
+    once: Boolean = false,
+    block: suspend CoroutineScope.() -> Unit
+): MutableSharedFlow<T> {
+    scope.launch(start = CoroutineStart.UNDISPATCHED) {
+        var launchJob: Job? = null
+        subscriptionCount
+            .collect { count ->
+                if (count == 0) {
+                    launchJob?.cancel()
+                } else if (launchJob == null || !once) {
+                    if (launchJob?.isActive != true) {
+                        launchJob = scope.launch(block = block)
+                    }
+                }
+            }
+    }
+    return this
+}

@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="auth_sign_nickname_hint">Nickname</string>
+    <string name="auth_sign_password_hint">Password</string>
+    <string name="auth_sign_sign_in_button_text">Sign In/Sign Up</string>
     <string name="auth_code_pin_view_hint">_</string>
     <string name="auth_code_num_pad_key_1">1</string>
     <string name="auth_code_num_pad_key_2">2</string>

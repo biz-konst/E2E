@@ -1,19 +1,18 @@
-package bk.github.auth.signin.data
+package bk.github.auth.signin.ui
 
-import android.util.Log
 import java.util.regex.Pattern
 
 @Suppress("MemberVisibilityCanBePrivate")
-open class SignInValidatorImpl(conditions: List<Pair<String, String>>? = null) : SignInValidator {
+open class SignInInputValidatorImpl(conditions: List<Pair<String, String>>? = null) :
+    SignInInputValidator {
 
     protected val conditions: LinkedHashMap<Pattern, String> = linkedMapOf<Pattern, String>()
         .also { conditions?.forEach { p -> addCondition(p.first, p.second) } }
 
-    override suspend fun validate(value: String, inputComplete: Boolean): String? {
-        return conditions.firstOrNull { !it.matcher(value).matches() }?.value
-    }
+    override suspend fun invoke(value: String): String? =
+        conditions.firstOrNull { !it.matcher(value).matches() }?.value
 
-    fun addCondition(pattern: String, message: String): SignInValidator =
+    fun addCondition(pattern: String, message: String): SignInInputValidator =
         apply { conditions[Pattern.compile(pattern)] = message }
 
     private fun <K, V> LinkedHashMap<K, V>.firstOrNull(predicate: (K) -> Boolean): Map.Entry<K, V>? {

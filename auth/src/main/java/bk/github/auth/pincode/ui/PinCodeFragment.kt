@@ -1,7 +1,6 @@
 package bk.github.auth.pincode.ui
 
 import android.content.Context
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.View
 import android.widget.TextView
@@ -60,8 +59,7 @@ abstract class PinCodeFragment : Fragment() {
     open val config: PinCodeFeatureConfig by lazy { pinCodeViewModel.config }
 
     val pinCodeViewModel: PinCodeViewModel by viewModels(
-        ownerProducer = ::getViewModelOwner,
-        factoryProducer = ::getViewModelFactory
+        ownerProducer = ::getViewModelOwner, factoryProducer = ::getViewModelFactory
     )
 
     lateinit var pinCodeBinding: PinCodeFragmentBinding private set
@@ -76,7 +74,7 @@ abstract class PinCodeFragment : Fragment() {
     private val errorCleaner = Runnable { clearPinCode() }
     private val pinCodeUnlock = Runnable { unlockPinCode() }
 
-    private var pinCodeInputLocked = MutableStateFlow(false)
+    private val pinCodeInputLocked = MutableStateFlow(false)
 
     private val textShowHelper by lazy { TextShowHelper(pinCodeBinding) }
 
@@ -114,21 +112,22 @@ abstract class PinCodeFragment : Fragment() {
     }
 
     open fun onUiStateChanged(state: UiState) {
-        if (isPinCodeRotten(state)) clearPinCode()
+        if (isPinCodeOverdue(state) && state.pinCodeState.failure == null) {
+            clearPinCode()
+        }
     }
 
     open fun isPinCodeEnable(state: UiState): Boolean =
-        !pinCodeInputLocked.value
+        !(isPinCodeInputLocked() || isPinCodeOverdue(state))
                 && state.pinCodeState.status == PinCodeStatus.Input
-                && pinCodeAvailable(state)
                 && state.requestState.status != RequestStatus.Performing
 
     open fun isQueryActionVisible(state: UiState): Boolean =
-        state.timeout < Long.MAX_VALUE ||
+        state.queryLockTimeout < Long.MAX_VALUE ||
                 state.requestState.status == RequestStatus.Performing
 
     open fun isQueryActionEnable(state: UiState): Boolean =
-        state.timeout <= 0
+        state.queryLockTimeout <= 0
                 && state.requestState.status != RequestStatus.Performing
                 && state.pinCodeState.status != PinCodeStatus.Checking
 
@@ -144,17 +143,17 @@ abstract class PinCodeFragment : Fragment() {
                 || state.pinCodeState.status == PinCodeStatus.Checking
                 || state.requestState.status == RequestStatus.Performing
 
+    fun isPinCodeInputLocked() = pinCodeInputLocked.value
+
     fun setPinCode(value: String) {
         pinGrid.code = value
         checkPinCode(value)
     }
 
     private fun initAttrs(context: Context) {
-        val a = context.theme.obtainStyledAttributes(ATTRS)
-        try {
-            pinViewId = a.getResourceId(0, R.layout.pin_code_pin_view)
-        } finally {
-            a.recycle()
+        with(context.theme.obtainStyledAttributes(ATTRS)) {
+            pinViewId = getResourceId(0, R.layout.pin_code_pin_view)
+            recycle()
         }
     }
 
@@ -226,17 +225,14 @@ abstract class PinCodeFragment : Fragment() {
     }
 
     private fun startClearingPinError() {
-        pinGrid.removeCallbacks(errorCleaner)
-        if (pinGrid.failed) {
-            pinGrid.postDelayed(errorCleaner, errorCleaningDelayMs)
+        pinGrid.apply {
+            removeCallbacks(errorCleaner)
+            if (failed) postDelayed(errorCleaner, errorCleaningDelayMs)
         }
     }
 
-    private fun pinCodeAvailable(state: UiState) =
-        state.lifetime > 0 && state.attemptNumber < state.pinCodeState.availableAttempts
-
-    private fun isPinCodeRotten(state: UiState) =
-        !pinCodeAvailable(state) && state.pinCodeState.failure == null
+    private fun isPinCodeOverdue(state: UiState) =
+        state.attemptsLifetime <= 0 || state.attemptNumber >= state.pinCodeState.availableAttempts
 
     private fun isRequestSuccess(state: RequestState) =
         state.status == RequestStatus.Done && state.failure == null
@@ -248,10 +244,7 @@ abstract class PinCodeFragment : Fragment() {
 
     private fun pinCodeStateChanged(state: PinCodeState) {
         setPinCodeLength(state.length)
-        when (state.status) {
-            PinCodeStatus.Accepted -> pinCodeAccept()
-            else -> {}
-        }
+        if (state.status == PinCodeStatus.Accepted) pinCodeAccept()
         showPinCodeError(state.failure)
         onPinCodeStateChanged(state)
     }
@@ -270,10 +263,10 @@ abstract class PinCodeFragment : Fragment() {
                 state.pinCodeState.status,
                 state.attemptNumber,
                 state.pinCodeState.availableAttempts,
-                state.lifetime
+                state.attemptsLifetime
             )
         )
-        setRequestDelayText(formatter.formatRequestDelayText(state.timeout))
+        setRequestDelayText(formatter.formatRequestDelayText(state.queryLockTimeout))
         showProgress(onShowProgress(state), state)
         onUiStateChanged(state)
         textShowHelper.showText(animation)

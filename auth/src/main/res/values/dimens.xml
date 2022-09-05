@@ -1,9 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--    sign    -->
+    <!--    size    -->
+    <dimen name="auth_sign_edit_text_width">230dp</dimen>
+
+    <!--    margins    -->
+    <dimen name="auth_sign_text_small_margin">8dp</dimen>
+    <dimen name="auth_sign_nickname_margin_top">@dimen/auth_sign_text_small_margin</dimen>
+    <dimen name="auth_sign_password_margin_top">@dimen/auth_sign_text_small_margin</dimen>
+    <dimen name="auth_sign_button_margin_top">@dimen/auth_sign_text_small_margin</dimen>
+
+    <!--    code    -->
     <!--    size    -->
     <dimen name="auth_code_num_pad_key_min_width">56dp</dimen>
     <dimen name="auth_code_check_progress_bar_height">2dp</dimen>
     <dimen name="auth_code_check_progress_bar_width">100dp</dimen>
+    <dimen name="auth_code_pin_view_width">12dp</dimen>
 
     <!--    margins    -->
     <dimen name="auth_code_text_small_margin">6dp</dimen>
@@ -19,6 +31,5 @@
     auth_code_check_progress_margin_top + auth_code_check_progress_bar_height -->
     <dimen name="auth_code_pin_grid_margin_bottom">@dimen/auth_code_check_progress_bar_height
     </dimen>
-    <dimen name="auth_code_pin_view_width">12dp</dimen>
 
 </resources>

@@ -9,7 +9,7 @@ import bk.github.auth.pincode.data.model.PinCodeValue
 import bk.github.auth.pincode.ui.PinCodeViewModel.ModelState.PerformStatus
 import bk.github.auth.pincode.ui.PinCodeViewModel.UiState.PinCodeStatus
 import bk.github.auth.pincode.ui.PinCodeViewModel.UiState.RequestStatus
-import bk.github.tools.tickerFlow
+import bk.github.auth.utils.startCountdownTimer
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.*
 
@@ -20,14 +20,14 @@ class PinCodeViewModel(
 ) : ViewModel() {
 
     companion object {
-        private const val SECOND_MS = 1000L
-        private const val FOREVER_MS = 31_536_000_000L
+        private const val DELAY_TIMER_INTERVAL_MS = 1000L
+        private const val FOREVER_MS = 365 * 24 * 60 * 60 * 1_000L  // one year
 
         const val TAG = "Auth.PinCodeViewModel"
     }
 
     @JvmField
-    var queryDelayTimerInterval = 1 * SECOND_MS
+    var delayTimerInterval = DELAY_TIMER_INTERVAL_MS
 
     private val requestResult = MutableSharedFlow<PinCodeState>()
     private val pinCodeState = merge(manager.observePinCodeState(), requestResult)
@@ -39,13 +39,13 @@ class PinCodeViewModel(
 
     @ExperimentalCoroutinesApi
     private val queryTimeoutTimer = pinCodeState
-        .map { it.lastRequestTime + it.requestTimeout }.distinctUntilChanged()
-        .flatMapLatest { endTime -> startTimer(endTime) }
+        .map { it.queryUnlockTime }.distinctUntilChanged()
+        .flatMapLatest { startCountdownTimer(it) }
 
     @ExperimentalCoroutinesApi
     private val codeLifetimeTimer = pinCodeState
         .map { it.expirationTime }.distinctUntilChanged()
-        .flatMapLatest { endTime -> startTimer(endTime) }
+        .flatMapLatest { startCountdownTimer(it) }
 
     private val uiEvent = MutableSharedFlow<UiEvent>()
     private val modelState = MutableStateFlow(ModelState.EMPTY)
@@ -55,10 +55,7 @@ class PinCodeViewModel(
         .transformLatest<UiEvent, Unit> { event ->
             when (event) {
                 is UiEvent.CheckPinCode -> {
-                    val error = verifyPinCode(event.code)
-                    if (error != null) {
-                        applyModelState { pinCodeFailed(error) }
-                    } else if (codeIsFull(event.code)) {
+                    if (codeIsFull(event.code)) {
                         applyModelState { pinCodeChecking() }
                         applyModelState {
                             acceptPinCode(event.code).fold(
@@ -80,7 +77,6 @@ class PinCodeViewModel(
                         )
                     }
                 }
-                else -> {}
             }
         }
         .onStart { emit(Unit) }
@@ -105,9 +101,9 @@ class PinCodeViewModel(
                     status = a.queryPinCodeStatus.requestStatus,
                     failure = a.queryPinCodeStatus.failure,
                 ),
-                lifetime = l,
+                attemptsLifetime = l,
                 attemptNumber = p.attemptsSpent,
-                timeout = t,
+                queryLockTimeout = t,
             )
         }.flowOn(
             Dispatchers.Default
@@ -120,16 +116,12 @@ class PinCodeViewModel(
         )
 
     fun checkPinCode(code: String): Boolean {
-        viewModelScope.launch(start = CoroutineStart.UNDISPATCHED) {
-            uiEvent.emit(UiEvent.CheckPinCode(code))
-        }
+        emitEvent(UiEvent.CheckPinCode(code))
         return codeIsFull(code)
     }
 
     fun queryPinCode() {
-        viewModelScope.launch(start = CoroutineStart.UNDISPATCHED) {
-            uiEvent.emit(UiEvent.QueryPinCode)
-        }
+        emitEvent(UiEvent.QueryPinCode)
     }
 
     fun resetPinCodeState() {
@@ -142,17 +134,8 @@ class PinCodeViewModel(
 
     private fun codeIsFull(code: String) = code.length == pinCodeState.value.length
 
-    private fun emitEvent(event: UiEvent) = uiEvent.tryEmit(event)
-
-    private suspend fun verifyPinCode(code: String): Throwable? {
-        try {
-            manager.verifyPinCode(code)?.let {
-                return Exception(it)
-            }
-        } finally {
-        }
-        return null
-    }
+    private fun emitEvent(event: UiEvent) =
+        viewModelScope.launch(start = CoroutineStart.UNDISPATCHED) { uiEvent.emit(event) }
 
     private suspend fun acceptPinCode(code: String): Result<*> = runCatching {
         manager.acceptPinCode(PinCodeValue(id = pinCodeState.value.id, value = code)).getOrThrow()
@@ -165,24 +148,12 @@ class PinCodeViewModel(
     private fun availableAttempts(state: PinCodeState): Int =
         if (state.length == 0) 0 else state.numberOfAttempts
 
-    private fun startTimer(endTime: Long): Flow<Long> {
-        val final = endTime - System.currentTimeMillis()
-
-        if (final >= FOREVER_MS) {
-            return flowOf(Long.MAX_VALUE)
-        }
-
-        return tickerFlow(queryDelayTimerInterval, final)
-            .map { final - it }
-            .onCompletion { emit(0) }
-    }
-
     data class UiState(
         val pinCodeState: PinCodeState,
         val requestState: RequestState,
-        val lifetime: Long = 0,
+        val attemptsLifetime: Long = 0,
         val attemptNumber: Int = 0,
-        val timeout: Long = 0,
+        val queryLockTimeout: Long = 0,
     ) {
         enum class PinCodeStatus { Input, Checking, Accepted }
 
@@ -212,8 +183,6 @@ class PinCodeViewModel(
         @JvmInline
         value class CheckPinCode(val code: String) : UiEvent
         object QueryPinCode : UiEvent
-        object CheckPinCodeResultHandled : UiEvent
-        object QueryPinCodeResultHandled : UiEvent
     }
 
     private data class ModelState(
