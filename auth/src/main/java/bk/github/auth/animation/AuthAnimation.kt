@@ -25,7 +25,7 @@ class AuthAnimation : PinCodeFragment.Animation {
     private var helperTextAnimator: TextAnimator? = null
     private var errorTextAnimator: TextAnimator? = null
     private var progressTextAnimator: TextAnimator? = null
-    private var delayTextAnimator: TextAnimator? = null
+    private var queryPinDelayTextAnimator: TextAnimator? = null
 
     override fun animatePinCode(target: View, failed: Boolean) {
         if (failed) {
@@ -41,7 +41,7 @@ class AuthAnimation : PinCodeFragment.Animation {
         }
     }
 
-    override fun animateErrorText(target: TextView, text: String?, visible: Boolean) {
+    override fun animatePinCodeErrorText(target: TextView, text: String?, visible: Boolean) {
         (errorTextAnimator ?: TextAnimator(
             target,
             animateTextChange = false,
@@ -59,7 +59,7 @@ class AuthAnimation : PinCodeFragment.Animation {
             .start(text, visible)
     }
 
-    override fun animateHelperText(target: TextView, text: String?, visible: Boolean) {
+    override fun animatePinCodeHelperText(target: TextView, text: String?, visible: Boolean) {
         (helperTextAnimator ?: TextAnimator(
             target,
             animateTextChange = false,
@@ -69,7 +69,7 @@ class AuthAnimation : PinCodeFragment.Animation {
             .start(text, visible)
     }
 
-    override fun animateProgressText(target: TextView, text: String?, visible: Boolean) {
+    override fun animatePinCodeProgressText(target: TextView, text: String?, visible: Boolean) {
         (progressTextAnimator ?: TextAnimator(
             target,
             animateTextChange = false,
@@ -79,13 +79,13 @@ class AuthAnimation : PinCodeFragment.Animation {
             .start(text, visible)
     }
 
-    override fun animateDelayText(target: TextView, text: String?, visible: Boolean) {
-        (delayTextAnimator ?: TextAnimator(
+    override fun animateQueryPinDelayText(target: TextView, text: String?, visible: Boolean) {
+        (queryPinDelayTextAnimator ?: TextAnimator(
             target,
             animateTextChange = false,
             showAnimation = { fadeIn(target) + fall(target) },
             hideAnimation = ::fadeOut,
-        ).also { delayTextAnimator = it })
+        ).also { queryPinDelayTextAnimator = it })
             .start(text, visible)
     }
 
@@ -96,31 +96,31 @@ class AuthAnimation : PinCodeFragment.Animation {
         }
     }
 
-    override fun cancelErrorTextAnimation() {
+    override fun cancelPinCodeErrorTextAnimation() {
         errorTextAnimator?.let {
             it.cancel()
             errorTextAnimator = null
         }
     }
 
-    override fun cancelHelperTextAnimation() {
+    override fun cancelPinCodeHelperTextAnimation() {
         helperTextAnimator?.let {
             it.cancel()
             helperTextAnimator = null
         }
     }
 
-    override fun cancelProgressTextAnimation() {
+    override fun cancelPinCodeProgressTextAnimation() {
         progressTextAnimator?.let {
             it.cancel()
             progressTextAnimator = null
         }
     }
 
-    override fun cancelDelayTextAnimation() {
-        delayTextAnimator?.let {
+    override fun cancelQueryPinDelayTextAnimation() {
+        queryPinDelayTextAnimator?.let {
             it.cancel()
-            delayTextAnimator = null
+            queryPinDelayTextAnimator = null
         }
     }
 

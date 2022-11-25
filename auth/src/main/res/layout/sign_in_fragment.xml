@@ -10,53 +10,69 @@
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/serverInputLayout"
-        style="?attr/authSignInNicknameTextInputLayoutStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@id/nicknameInputLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        style="?attr/authSignInServerTextInputLayoutStyle"
+        android:theme="?attr/authSignInServerTextInputLayoutTheme"
+        app:helperText="?attr/authSignInServerTextInputLayoutHelperText"
+        tools:ignore="MissingConstraints">
 
-        <androidx.appcompat.widget.AppCompatAutoCompleteTextView
+        <bk.github.auth.signin.views.TextInputSpinner
             android:id="@+id/serverEdit"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textIsSelectable="true"
-            android:completionThreshold="0"
-            android:editable="false"/>
-
+            style="?attr/authSignInServerTextInputEditTextStyle"
+            android:hint="?attr/authSignInServerTextInputLayoutHint"
+            android:imeOptions="actionNext" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/nicknameInputLayout"
         style="?attr/authSignInNicknameTextInputLayoutStyle"
+        android:theme="?attr/authSignInNicknameTextInputLayoutTheme"
+        app:helperText="?attr/authSignInNicknameTextInputLayoutHelperText"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.MaterialAutoCompleteTextView
             android:id="@+id/nicknameEdit"
             style="?attr/authSignInNicknameTextInputEditTextStyle"
             android:completionThreshold="0"
-            android:imeOptions="actionNext"
-            tools:hint="Nickname" />
+            android:hint="?attr/authSignInNicknameTextInputLayoutHint"
+            android:imeOptions="actionNext" />
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/passwordInputLayout"
         style="?attr/authSignInPasswordTextInputLayoutStyle"
+        android:theme="?attr/authSignInPasswordTextInputLayoutTheme"
+        app:helperText="?attr/authSignInPasswordTextInputLayoutHelperText"
         tools:ignore="MissingConstraints">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/passwordEdit"
             style="?attr/authSignInPasswordTextInputEditTextStyle"
-            android:imeOptions="actionDone"
-            tools:hint="Password" />
+            android:hint="?attr/authSignInPasswordTextInputLayoutHint"
+            android:imeOptions="actionDone" />
     </com.google.android.material.textfield.TextInputLayout>
 
-    <Button
-        android:id="@+id/actionSignIn"
-        style="?attr/authSignInButtonStyle"
+    <bk.github.auth.signin.views.ProgressButtonLayout
+        android:id="@+id/signInButtonLayout"
+        style="?attr/authSignInSignInButtonLayoutStyle"
+        tools:ignore="MissingConstraints">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/signInButton"
+            style="?attr/authSignInSignInButtonStyle"
+            android:text="?attr/authSignInSignInButtonText"
+            tools:text="Sign In" />
+
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:id="@+id/signInProgressIndicator"
+            style="?attr/authSignInSignInProgressIndicatorStyle" />
+
+    </bk.github.auth.signin.views.ProgressButtonLayout>
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/signUpButton"
+        style="?attr/authSignInSignUpButtonStyle"
+        android:text="?attr/authSignInSignUpButtonText"
         tools:ignore="MissingConstraints"
-        tools:text="Sign In / Sign Up" />
+        tools:text="Sign Up" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

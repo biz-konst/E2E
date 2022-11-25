@@ -1,6 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <style name="Widget.Auth.TextView" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Widget.Auth.TextView.Small">
+        <item name="android:textAppearance">?attr/textAppearanceBodySmall</item>
+    </style>
+
     <!--  auth sign  -->
     <style name="Widget.Auth.Sign.TextInputLayout" parent="Widget.Material3.TextInputLayout.OutlinedBox.Dense">
         <item name="android:layout_width">@dimen/auth_sign_edit_text_width</item>
@@ -16,15 +26,24 @@
         <item name="layout_constraintEnd_toEndOf">parent</item>
     </style>
 
+    <style name="Widget.Auth.Sign.TextInputLayout.Server">
+        <item name="startIconDrawable">@drawable/ic_auth_services_24</item>
+        <item name="endIconMode">dropdown_menu</item>
+
+        <item name="layout_constraintBottom_toTopOf">@id/nicknameInputLayout</item>
+        <item name="layout_constraintTop_toTopOf">parent</item>
+        <item name="layout_constraintVertical_chainStyle">packed</item>
+
+        <!-- поле сервера может быть невидимым, поэтому переносим отступ для никнейма сюда -->
+        <item name="android:layout_marginBottom">@dimen/auth_sign_nickname_margin_top</item>
+    </style>
+
     <style name="Widget.Auth.Sign.TextInputLayout.Nickname">
-        <item name="android:layout_marginTop">@dimen/auth_sign_nickname_margin_top</item>
         <item name="startIconDrawable">@drawable/ic_auth_nickname_24</item>
         <item name="endIconMode">dropdown_menu</item>
 
         <item name="layout_constraintBottom_toTopOf">@id/passwordInputLayout</item>
-<!--        <item name="layout_constraintTop_toTopOf">parent</item>-->
         <item name="layout_constraintTop_toBottomOf">@id/serverInputLayout</item>
-        <item name="layout_constraintVertical_chainStyle">packed</item>
     </style>
 
     <style name="Widget.Auth.Sign.TextInputLayout.Password">
@@ -32,7 +51,7 @@
         <item name="startIconDrawable">@drawable/ic_auth_password_24</item>
         <item name="passwordToggleEnabled">true</item>
 
-        <item name="layout_constraintBottom_toTopOf">@id/actionSignIn</item>
+        <item name="layout_constraintBottom_toTopOf">@id/signInButton</item>
         <item name="layout_constraintTop_toBottomOf">@id/nicknameInputLayout</item>
     </style>
 
@@ -40,6 +59,10 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:maxLines">1</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.TextInputEditText.Server">
+        <item name="android:textIsSelectable">true</item>
     </style>
 
     <style name="Widget.Auth.Sign.TextInputEditText.Nickname">
@@ -50,29 +73,45 @@
         <item name="android:inputType">textPassword</item>
     </style>
 
-    <style name="Widget.Auth.Sign.Button.SignIn" parent="Widget.Material3.Button">
+    <style name="Widget.Auth.Sign.ProgressButtonLayout" parent="">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">@dimen/auth_sign_button_margin_top</item>
+        <item name="pbGravity">center</item>
+    </style>
 
+    <style name="Widget.Auth.Sign.SignButton" parent="Widget.Material3.Button">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:lines">1</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.ProgressIndicator" parent="Widget.Material3.CircularProgressIndicator.Small">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:indeterminate">true</item>
+    </style>
+
+    <style name="Widget.Auth.Sign.ProgressButtonLayout.SignIn">
         <item name="layout_constraintBottom_toBottomOf">parent</item>
-        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintEnd_toStartOf">@id/signUpButton</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
         <item name="layout_constraintTop_toBottomOf">@id/passwordInputLayout</item>
     </style>
 
+    <style name="Widget.Auth.Sign.SignButton.SignUp">
+        <item name="android:layout_marginTop">@dimen/auth_sign_button_margin_top</item>
+        <item name="android:visibility">gone</item>
+
+        <item name="layout_constraintBottom_toBottomOf">parent</item>
+        <item name="layout_constraintStart_toEndOf">@id/signInButtonLayout</item>
+        <item name="layout_constraintEnd_toEndOf">parent</item>
+        <item name="layout_constraintTop_toBottomOf">@id/passwordInputLayout</item>
+    </style>
+
     <!--  auth code  -->
-    <style name="Widget.Auth.Code.TextView" parent="Widget.AppCompat.TextView">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:gravity">center</item>
-    </style>
-
-    <style name="Widget.Auth.Code.TextView.Small">
-        <item name="android:textAppearance">?attr/textAppearanceBodySmall</item>
-    </style>
-
-    <style name="Widget.Auth.Code.TextView.Caption">
+    <style name="Widget.Auth.Code.TextView.Caption" parent="Widget.Auth.TextView">
         <!--        <item name="layout_constraintBottom_toTopOf">@id/pinGrid</item>-->
         <item name="layout_constraintEnd_toEndOf">parent</item>
         <item name="layout_constraintStart_toStartOf">parent</item>
@@ -100,16 +139,16 @@
     </style>
 
     <style name="Widget.Auth.Code.CheckedTextView.PinView" parent="Widget.Material3.CheckedTextView">
-        <!--        <item name="android:layout_width">wrap_content</item>-->
+<!--                <item name="android:layout_width">wrap_content</item>-->
         <item name="android:layout_width">@dimen/auth_code_pin_view_width</item>
         <item name="android:layout_height">wrap_content</item>
 
-        <!--        <item name="android:checkMark">@drawable/auth_pin_icon</item>-->
         <item name="android:textAppearance">?attr/textAppearanceTitleLarge</item>
         <item name="android:textColor">@color/auth_code_pin_color</item>
+<!--            <item name="android:checkMark">@drawable/auth_pin_icon</item>-->
         <item name="android:hint">?attr/authPinCodePinViewHint</item>
 
-        <item name="android:duplicateParentState">true</item>
+<!--        <item name="android:duplicateParentState">true</item>-->
     </style>
 
     <style name="Widget.Auth.Code.ProgressBar.Check" parent="Widget.Material3.CircularProgressIndicator.Small">
@@ -133,16 +172,16 @@
         <item name="android:layout_marginBottom">@dimen/auth_code_num_pad_margin_top</item>
     </style>
 
-    <style name="Widget.Auth.Code.TextView.Error" parent="Widget.Auth.Code.TextView.Small">
+    <style name="Widget.Auth.Code.TextView.Error" parent="Widget.Auth.TextView.Small">
         <item name="android:textColor">?attr/colorError</item>
         <item name="android:maxLines">1</item>
     </style>
 
-    <style name="Widget.Auth.Code.TextView.Helper" parent="Widget.Auth.Code.TextView.Small">
+    <style name="Widget.Auth.Code.TextView.Helper" parent="Widget.Auth.TextView.Small">
         <item name="android:maxLines">1</item>
     </style>
 
-    <style name="Widget.Auth.Code.TextView.Progress" parent="Widget.Auth.Code.TextView.Small">
+    <style name="Widget.Auth.Code.TextView.Progress" parent="Widget.Auth.TextView.Small">
         <item name="android:maxLines">1</item>
     </style>
 
@@ -181,7 +220,7 @@
         <item name="iconPadding">0dp</item>
     </style>
 
-    <style name="Widget.Auth.Code.TextView.RequestDelay" parent="Widget.Auth.Code.TextView.Small">
+    <style name="Widget.Auth.Code.TextView.RequestDelay" parent="Widget.Auth.TextView.Small">
         <!--        <item name="android:layout_width">0dp</item>-->
         <item name="android:layout_marginTop">@dimen/auth_code_delay_text_margin_top</item>
         <item name="android:maxLines">2</item>

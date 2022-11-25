@@ -3,12 +3,13 @@
 package bk.github.tools
 
 import android.os.SystemClock
-import androidx.lifecycle.*
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.channelFlow
+import kotlinx.coroutines.flow.flow
 
 /**
- * Поток с эмиссией через равные промежутки времени
+ * Создает поток выдающий зачения через равные промежутки времени
  */
 fun tickerFlow(interval: Long, finalInterval: Long = Long.MAX_VALUE): Flow<Long> {
     require(interval > 0) { "Interval cannot be empty" }
@@ -25,42 +26,55 @@ fun tickerFlow(interval: Long, finalInterval: Long = Long.MAX_VALUE): Flow<Long>
 }
 
 /**
- * Терминальный оператор потока с учетом жизненного цикла
+ * Возвращает поток, который переключается на новый поток, создаваемый функцией преобразования,
+ * каждый раз, когда исходный поток выдает значение. Когда исходный поток выдает новое значение,
+ * предыдущий поток, созданный блоком преобразования, отменяется.
  */
-inline fun <T> Flow<T>.collectOnLifecycle(
-    lifecycleOwner: LifecycleOwner,
-    state: Lifecycle.State = Lifecycle.State.STARTED,
-    noinline block: (T) -> Unit
-) = lifecycleOwner.lifecycleScope.launch {
-    lifecycleOwner.repeatOnLifecycle(state) { collect(block) }
-}
-
-fun <T> MutableStateFlow<T>.launchWhileSubscribed(
-    scope: CoroutineScope,
-    once: Boolean = false,
-    block: suspend CoroutineScope.() -> Unit
-): MutableStateFlow<T> {
-    (this as MutableSharedFlow<*>).launchWhileSubscribed(scope, once, block)
-    return this
-}
-
-fun <T> MutableSharedFlow<T>.launchWhileSubscribed(
-    scope: CoroutineScope,
-    once: Boolean = false,
-    block: suspend CoroutineScope.() -> Unit
-): MutableSharedFlow<T> {
-    scope.launch(start = CoroutineStart.UNDISPATCHED) {
-        var launchJob: Job? = null
-        subscriptionCount
-            .collect { count ->
-                if (count == 0) {
-                    launchJob?.cancel()
-                } else if (launchJob == null || !once) {
-                    if (launchJob?.isActive != true) {
-                        launchJob = scope.launch(block = block)
-                    }
-                }
-            }
+fun <T, R> Flow<T>.switchMapLatest(block: (T) -> Flow<R>): Flow<R> = channelFlow {
+    var job: Job? = null
+    collect { value ->
+        job?.cancelAndJoin()
+        job = launch(start = CoroutineStart.UNDISPATCHED) { block(value).collect { send(it) } }
     }
-    return this
 }
+
+///**
+// * Терминальный оператор потока с учетом жизненного цикла
+// */
+//inline fun <T> Flow<T>.collectOnLifecycle(
+//    lifecycleOwner: LifecycleOwner,
+//    state: Lifecycle.State = Lifecycle.State.STARTED,
+//    noinline block: (T) -> Unit
+//) = lifecycleOwner.lifecycleScope.launch {
+//    lifecycleOwner.repeatOnLifecycle(state) { collect(block) }
+//}
+//
+//fun <T> MutableStateFlow<T>.launchWhileSubscribed(
+//    scope: CoroutineScope,
+//    once: Boolean = false,
+//    block: suspend CoroutineScope.() -> Unit
+//): MutableStateFlow<T> {
+//    (this as MutableSharedFlow<*>).launchWhileSubscribed(scope, once, block)
+//    return this
+//}
+//
+//fun <T> MutableSharedFlow<T>.launchWhileSubscribed(
+//    scope: CoroutineScope,
+//    once: Boolean = false,
+//    block: suspend CoroutineScope.() -> Unit
+//): MutableSharedFlow<T> {
+//    scope.launch(start = CoroutineStart.UNDISPATCHED) {
+//        var launchJob: Job? = null
+//        subscriptionCount
+//            .collect { count ->
+//                if (count == 0) {
+//                    launchJob?.cancel()
+//                } else if (launchJob == null || !once) {
+//                    if (launchJob?.isActive != true) {
+//                        launchJob = scope.launch(block = block)
+//                    }
+//                }
+//            }
+//    }
+//    return this
+//}

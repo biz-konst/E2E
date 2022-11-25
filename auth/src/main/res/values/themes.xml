@@ -2,6 +2,12 @@
 <resources>
 
     <style name="ThemeOverlay.Auth.Sign.Container" parent="">
+        <item name="authSignInServerTextInputLayoutStyle">
+            @style/Widget.Auth.Sign.TextInputLayout.Server
+        </item>
+        <item name="authSignInServerTextInputEditTextStyle">
+            @style/Widget.Auth.Sign.TextInputEditText.Server
+        </item>
         <item name="authSignInNicknameTextInputLayoutStyle">
             @style/Widget.Auth.Sign.TextInputLayout.Nickname
         </item>
@@ -14,7 +20,23 @@
         <item name="authSignInPasswordTextInputEditTextStyle">
             @style/Widget.Auth.Sign.TextInputEditText.Password
         </item>
-        <item name="authSignInButtonStyle">@style/Widget.Auth.Sign.Button.SignIn</item>
+        <item name="authSignInSignInButtonLayoutStyle">
+            @style/Widget.Auth.Sign.ProgressButtonLayout.SignIn
+        </item>
+        <item name="authSignInSignInButtonStyle">@style/Widget.Auth.Sign.SignButton</item>
+        <item name="authSignInSignInProgressIndicatorStyle">@style/Widget.Auth.Sign.ProgressIndicator
+        </item>
+        <item name="authSignInSignUpButtonStyle">@style/Widget.Auth.Sign.SignButton.SignUp</item>
+        <item name="authSignInServerTextInputLayoutHint">@string/auth_sign_server_hint</item>
+        <item name="authSignInServerTextInputLayoutHelperText">@null</item>
+        <item name="authSignInNicknameTextInputLayoutHint">@string/auth_sign_nickname_hint</item>
+        <item name="authSignInNicknameTextInputLayoutHelperText">@null</item>
+        <item name="authSignInPasswordTextInputLayoutHint">@string/auth_sign_password_hint</item>
+        <item name="authSignInPasswordTextInputLayoutHelperText">@null</item>
+        <item name="authSignInSignInButtonText">@string/auth_sign_sign_in_button_text</item>
+        <item name="authSignInSignUpButtonText">@string/auth_sign_sign_up_button_text</item>
+        <item name="authSignInDropDownItemLayout">@android:layout/simple_spinner_dropdown_item
+        </item>
     </style>
 
     <style name="ThemeOverlay.Auth.Code.Container" parent="">

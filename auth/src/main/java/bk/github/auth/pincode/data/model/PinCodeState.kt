@@ -13,13 +13,3 @@ data class PinCodeState(
         val EMPTY = PinCodeState("")
     }
 }
-
-fun PinCodeSpec.asState(attemptsSpent: Int = 0) = PinCodeState(
-    id = id,
-    length = length,
-    numberOfAttempts = numberOfAttempts,
-    expirationTime = expirationTime,
-    queryUnlockTime = queryUnlockTime,
-    value = value,
-    attemptsSpent = attemptsSpent,
-)

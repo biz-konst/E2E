@@ -21,8 +21,10 @@
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/auth_pin_icon.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_auth_nickname_24.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_auth_pin_free_24.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_radio_button_checked_24.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/ic_radio_button_unchecked_24.xml" value="0.1" />
+        <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/pin_free.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/drawable/selector.xml" value="0.1" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/activity_main.xml" value="0.465625" />
         <entry key="..\:/work/android/projects/E2E/app/src/main/res/layout/fragment_blank.xml" value="0.465625" />
@@ -45,7 +47,7 @@
         <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_fragment.xml" value="0.465625" />
         <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_fragment2.xml" value="0.465625" />
         <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/pin_code_pin_view.xml" value="0.1" />
-        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/sign_in_fragment.xml" value="0.465625" />
+        <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/sign_in_fragment.xml" value="0.34517374517374516" />
         <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/signin_fragment.xml" value="0.428125" />
         <entry key="..\:/work/android/projects/E2E/auth/src/main/res/layout/test.xml" value="0.46458333333333335" />
         <entry key="..\:/work/android/sdk/platforms/android-31/data/res/drawable/progress_indeterminate_anim_medium_material.xml" value="0.1" />

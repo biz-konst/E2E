@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools" tools:ignore="MissingDefaultResource">
     <item android:color="?attr/colorError" app:failed="true" />
+    <item android:color="@color/design_default_color_secondary" android:state_enabled="false"/>
     <item android:color="?attr/colorPrimary" />
     <!--    <item android:color="?attr/colorOnSurfaceVariant" />-->
 </selector>

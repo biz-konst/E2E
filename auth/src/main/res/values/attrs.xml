@@ -1,13 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <declare-styleable name="ProgressButtonLayout">
+        <attr name="pbInsetLeft" format="dimension" />
+        <attr name="pbInsetTop" format="dimension" />
+        <attr name="pbInsetRight" format="dimension" />
+        <attr name="pbInsetBottom" format="dimension" />
+        <attr name="pbGravity" format="integer">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="center" value="0" />
+            <enum name="start" value="-1" />
+            <enum name="end" value="-2" />
+        </attr>
+    </declare-styleable>
+
     <!--  auth  -->
+    <attr name="authSignInServerTextInputLayoutStyle" format="reference" />
+    <attr name="authSignInServerTextInputEditTextStyle" format="reference" />
     <attr name="authSignInNicknameTextInputLayoutStyle" format="reference" />
     <attr name="authSignInNicknameTextInputEditTextStyle" format="reference" />
     <attr name="authSignInPasswordTextInputLayoutStyle" format="reference" />
     <attr name="authSignInPasswordTextInputEditTextStyle" format="reference" />
-    <attr name="authSignInButtonStyle" format="reference" />
+    <attr name="authSignInSignInButtonStyle" format="reference" />
+    <attr name="authSignInSignUpButtonStyle" format="reference" />
+    <attr name="authSignInSignInButtonLayoutStyle" format="reference"/>
+    <attr name="authSignInSignInProgressIndicatorStyle" format="reference"/>
 
     <attr name="authSignInContainerTheme" format="reference" />
+    <attr name="authSignInServerTextInputLayoutTheme" format="reference" />
+    <attr name="authSignInNicknameTextInputLayoutTheme" format="reference" />
+    <attr name="authSignInPasswordTextInputLayoutTheme" format="reference" />
+
+    <attr name="authSignInServerTextInputLayoutHint" format="string" />
+    <attr name="authSignInServerTextInputLayoutHelperText" format="string" />
+    <attr name="authSignInNicknameTextInputLayoutHint" format="string" />
+    <attr name="authSignInNicknameTextInputLayoutHelperText" format="string" />
+    <attr name="authSignInPasswordTextInputLayoutHint" format="string" />
+    <attr name="authSignInPasswordTextInputLayoutHelperText" format="string" />
+    <attr name="authSignInSignInButtonText" format="string" />
+    <attr name="authSignInSignUpButtonText" format="string" />
+
+    <attr name="authSignInDropDownItemLayout" format="reference" />
 
     <!--  code  -->
     <attr name="authPinCodeCaptionStyle" format="reference" />

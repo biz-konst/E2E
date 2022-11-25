@@ -4,7 +4,8 @@ import android.animation.Animator
 import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
 import android.view.View
-import com.google.android.material.animation.AnimationUtils
+import android.view.animation.LinearInterpolator
+import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.google.android.material.animation.AnimatorSetCompat
 
 internal object CustomAnimators {
@@ -14,7 +15,7 @@ internal object CustomAnimators {
             setProperty(View.ALPHA)
             setFloatValues(endValue)
             setDuration(duration)
-            interpolator = AnimationUtils.LINEAR_INTERPOLATOR
+            interpolator = LinearInterpolator()
         }
 
     fun fallAnimator(duration: Long, startValue: Float): Animator =
@@ -22,7 +23,7 @@ internal object CustomAnimators {
             setProperty(View.TRANSLATION_Y)
             setFloatValues(startValue, 0f)
             setDuration(duration)
-            interpolator = AnimationUtils.LINEAR_OUT_SLOW_IN_INTERPOLATOR
+            interpolator = LinearOutSlowInInterpolator()
         }
 
     fun waveAnimator(duration: Long, amplitude: Float, waves: Int): Animator {
@@ -38,7 +39,7 @@ internal object CustomAnimators {
             setProperty(View.TRANSLATION_X)
             setFloatValues(*fluctuations)
             setDuration(duration)
-            interpolator = AnimationUtils.LINEAR_INTERPOLATOR
+            interpolator = LinearInterpolator()
         }
     }
 

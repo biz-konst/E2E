@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Base.E2E.Platform.V23" parent="Base.E2E.Platform">
+    <!--    <style name="Base.E2E.Platform.V23" parent="Base.E2E.Platform">-->
+    <!--        &lt;!&ndash; Status bar color. &ndash;&gt;-->
+    <!--        <item name="android:statusBarColor">@android:color/transparent</item>-->
+    <!--    </style>-->
+    <style name="Theme.2E2" parent="Base.Theme.2E2">
         <!-- Status bar color. -->
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">?attr/isLightTheme</item>
     </style>
 </resources>

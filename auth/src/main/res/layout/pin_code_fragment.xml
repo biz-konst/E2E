@@ -25,8 +25,7 @@
         <bk.github.auth.pincode.views.PinCodeGrid
             android:id="@+id/pinGrid"
             style="?attr/authPinCodePinLayoutStyle"
-            android:theme="?attr/authPinCodePinLayoutTheme"
-            android:visibility="invisible">
+            android:theme="?attr/authPinCodePinLayoutTheme">
 
             <!--            <include layout="@layout/pin_code_pin_view" />-->
             <!--            <include layout="@layout/pin_code_pin_view" />-->
@@ -36,7 +35,8 @@
 
         <com.google.android.material.progressindicator.CircularProgressIndicator
             android:id="@+id/checkProgressBar"
-            style="?attr/authPinCodeProgressStyle" />
+            style="?attr/authPinCodeProgressStyle"
+            android:visibility="gone"/>
     </FrameLayout>
 
     <FrameLayout

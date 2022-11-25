@@ -18,10 +18,10 @@ import bk.github.auth.pincode.ui.PinCodeViewModel.UiState.*
 import bk.github.auth.pincode.views.applyLength
 import bk.github.auth.pincode.views.forceAppend
 import bk.github.auth.pincode.views.removeLast
-import bk.github.tools.observeOnLifecycle
 import bk.github.tools.requireMessage
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.update
 
 @Suppress("unused", "MemberVisibilityCanBePrivate")
 abstract class PinCodeFragment : Fragment() {
@@ -45,15 +45,15 @@ abstract class PinCodeFragment : Fragment() {
 
     interface Animation {
         fun animatePinCode(target: View, failed: Boolean)
-        fun animateHelperText(target: TextView, text: String?, visible: Boolean)
-        fun animateErrorText(target: TextView, text: String?, visible: Boolean)
-        fun animateProgressText(target: TextView, text: String?, visible: Boolean)
-        fun animateDelayText(target: TextView, text: String?, visible: Boolean)
+        fun animatePinCodeHelperText(target: TextView, text: String?, visible: Boolean)
+        fun animatePinCodeErrorText(target: TextView, text: String?, visible: Boolean)
+        fun animatePinCodeProgressText(target: TextView, text: String?, visible: Boolean)
+        fun animateQueryPinDelayText(target: TextView, text: String?, visible: Boolean)
         fun cancelPinCodeAnimation()
-        fun cancelErrorTextAnimation()
-        fun cancelHelperTextAnimation()
-        fun cancelProgressTextAnimation()
-        fun cancelDelayTextAnimation()
+        fun cancelPinCodeErrorTextAnimation()
+        fun cancelPinCodeHelperTextAnimation()
+        fun cancelPinCodeProgressTextAnimation()
+        fun cancelQueryPinDelayTextAnimation()
     }
 
     open val config: PinCodeFeatureConfig by lazy { pinCodeViewModel.config }
@@ -87,11 +87,11 @@ abstract class PinCodeFragment : Fragment() {
             pinGrid.setOnTextChangedListener(::onPinCodeChanged)
             setupNumPad()
             pinCodeViewModel.apply {
-                observeOnLifecycle(uiState.map { it.pinCodeState }.distinctUntilChanged())
-                { pinCodeStateChanged(it) }
-                observeOnLifecycle(uiState.map { it.requestState }.distinctUntilChanged())
-                { requestStateChanged(it) }
-                observeOnLifecycle(uiState.combine(pinCodeInputLocked) { s, _ -> uiStateChanged(s) })
+//                observeOnLifecycle(uiState.map { it.pinCodeState }.distinctUntilChanged())
+//                { pinCodeStateChanged(it) }
+//                observeOnLifecycle(uiState.map { it.requestState }.distinctUntilChanged())
+//                { requestStateChanged(it) }
+//                observeOnLifecycle(uiState.combine(pinCodeInputLocked) { s, _ -> uiStateChanged(s) })
             }
         }
     }
@@ -352,7 +352,7 @@ abstract class PinCodeFragment : Fragment() {
     }
 
     private fun setRequestDelayText(text: String?) {
-        animation.animateDelayText(pinCodeBinding.requestDelayText, text, text != null)
+        animation.animateQueryPinDelayText(pinCodeBinding.requestDelayText, text, text != null)
     }
 
     private class TextShowHelper(binding: PinCodeFragmentBinding) {
@@ -368,9 +368,13 @@ abstract class PinCodeFragment : Fragment() {
         fun showText(animation: Animation) {
             val progressVisible = !progressText.isNullOrEmpty()
             val errorVisible = !progressVisible && !errorText.isNullOrEmpty()
-            animation.animateHelperText(helper, helperText, !errorVisible && !progressVisible)
-            animation.animateErrorText(error, errorText, errorVisible)
-            animation.animateProgressText(progress, progressText, progressVisible)
+            animation.animatePinCodeHelperText(
+                helper,
+                helperText,
+                !errorVisible && !progressVisible
+            )
+            animation.animatePinCodeErrorText(error, errorText, errorVisible)
+            animation.animatePinCodeProgressText(progress, progressText, progressVisible)
         }
 
     }

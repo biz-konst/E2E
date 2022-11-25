@@ -1,9 +1,9 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- light/dark theme   -->
-    <style name="App.2E2.DayNight" parent="Base.E2E">
-        <!--  status bar color  -->
-        <item name="android:windowLightStatusBar">false</item>
-        <!--  navigation bar color  -->
-        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>
-    </style>
+<!--    &lt;!&ndash; light/dark theme   &ndash;&gt;-->
+<!--    <style name="Theme.2E2" parent="Base.E2E.Platform">-->
+<!--        &lt;!&ndash;  status bar color  &ndash;&gt;-->
+<!--        <item name="android:windowLightStatusBar">false</item>-->
+<!--        &lt;!&ndash;  navigation bar color  &ndash;&gt;-->
+<!--        <item name="android:windowLightNavigationBar" tools:ignore="NewApi">false</item>-->
+<!--    </style>-->
 </resources>

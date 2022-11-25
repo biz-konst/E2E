@@ -1,56 +1,35 @@
-@file:Suppress("unused", "NOTHING_TO_INLINE")
+@file:Suppress("unused", "NOTHING_TO_INLINE", "MemberVisibilityCanBePrivate")
 
 package bk.github.tools
 
 import kotlinx.coroutines.*
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
-import kotlin.coroutines.CoroutineContext
-import kotlin.coroutines.EmptyCoroutineContext
 
-class SingletonLauncher(val scope: CoroutineScope) : CoroutineScope by scope {
+class SingletonLauncher {
 
     private var job: Job? = null
     private val lock = Mutex()
 
     fun launch(
+        scope: CoroutineScope,
         start: CoroutineStart = CoroutineStart.DEFAULT,
-        context: CoroutineContext = EmptyCoroutineContext,
+        latest: Boolean = true,
         block: suspend CoroutineScope.() -> Unit
-    ): Job {
-        return scope.launch(start = CoroutineStart.UNDISPATCHED) {
-            lock.withLock { job ?: launchInternal(start, context, block) }
-        }
-    }
-
-    fun launchLatest(
-        start: CoroutineStart = CoroutineStart.DEFAULT,
-        context: CoroutineContext = EmptyCoroutineContext,
-        key: Any? = null,
-        block: suspend CoroutineScope.() -> Unit
-    ): Job {
-        return scope.launch(start = CoroutineStart.UNDISPATCHED) {
-            lock.withLock {
+    ) = scope.launch(start = CoroutineStart.UNDISPATCHED) {
+        lock.withLock {
+            if (latest || job == null) {
                 job?.cancelAndJoin()
-                launchInternal(start, context, block)
+                job = scope.launch(start = start, block = block)
             }
         }
     }
 
-    fun cancel() = job?.apply { cancel() }
+    fun cancel() = job?.cancel()
 
     fun isActive() = job?.isActive == true
 
-    private fun launchInternal(
-        start: CoroutineStart,
-        context: CoroutineContext,
-        block: suspend CoroutineScope.() -> Unit
-    ) {
-        job = scope.launch(start = start, context = context, block = block)
-    }
+    suspend fun join() = job?.join()
 
 }
-
-inline fun CoroutineScope.singletonLauncher() = SingletonLauncher(this)
-
 

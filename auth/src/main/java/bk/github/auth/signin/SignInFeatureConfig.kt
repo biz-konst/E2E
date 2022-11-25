@@ -1,9 +1,9 @@
 package bk.github.auth.signin
 
-interface SignInFeatureConfig {
-    val stopUiStateFlowTimeoutMs: Long get() = STOP_UI_STATE_FLOW_TIMEOUT_MS
+private const val STOP_UI_STATE_SHARING_MS = 5_000L
 
-    companion object {
-        private const val STOP_UI_STATE_FLOW_TIMEOUT_MS = 5_000L
-    }
-}
+class SignInFeatureConfig(
+    val stopUiStateSharingMs: Long = STOP_UI_STATE_SHARING_MS,
+    val serverPresent: Boolean = false,
+    val useSignUpButton: Boolean = false,
+)

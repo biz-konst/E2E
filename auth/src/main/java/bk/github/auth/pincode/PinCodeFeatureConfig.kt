@@ -12,7 +12,7 @@ interface PinCodeFeatureConfig {
     val animation: PinCodeFragment.Animation get() = AuthAnimation()
 
     companion object {
-        private const val ERROR_CLEANING_DELAY_MS = 2_000L
+        private const val ERROR_CLEANING_DELAY_MS = 12_000L
         private const val PIN_CODE_UNLOCK_DELAY_MS = 500L
         private const val STOP_UI_STATE_FLOW_TIMEOUT_MS = 5_000L
     }

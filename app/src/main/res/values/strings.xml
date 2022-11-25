@@ -27,5 +27,6 @@
     <string name="auth_code_pin_code_accepted">PIN code accepted</string>
     <string name="auth_code_checking_pin_code_progress">PIN code checking…</string>
     <string name="auth_code_request_pin_code_progress">PIN code request…</string>
+    <string name="auth_sign_sign_in_delay">You can sign in again in %s</string>
 
 </resources>

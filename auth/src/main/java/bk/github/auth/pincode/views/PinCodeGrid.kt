@@ -133,6 +133,7 @@ class PinCodeGrid @JvmOverloads constructor(
         if (onUpdateSlotsListener?.onPinCodeAddSlot(child)
                 ?: (child is TextView || child is Checkable)
         ) {
+            child.isDuplicateParentStateEnabled = true
             slotViews.add(child)
             updateSlot(child, transformed.getOrNull(length - 1)?.toString())
         }
@@ -369,3 +370,8 @@ fun PinCodeGrid.forceAppend(char: Char): Boolean {
 fun PinCodeGrid.removeLast() {
     remove(code.lastIndex)
 }
+
+/**
+ * Флаг заполненности пин-кода
+ */
+inline val PinCodeGrid.isFull get() = length == code.length
